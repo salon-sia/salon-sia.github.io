@@ -1,0 +1,47 @@
+{
+  "colors": {
+    "base": {
+      "value": "#faf9f6",
+      "description": "ベース：温かみのある白"
+    },
+    "sub": {
+      "value": "#eae6e0",
+      "description": "サブ：淡いグレージュ"
+    },
+    "text": {
+      "value": "#333333",
+      "description": "文字：濃いグレー"
+    },
+    "accent": {
+      "value": "#8faec4",
+      "description": "アクセント：ブルーデイジーをイメージした淡い青"
+    },
+    "helper": {
+      "value": "#a8b5a3",
+      "description": "補助色：葉のくすみグリーン"
+    }
+  },
+  "fonts": {
+    "english": {
+      "googleFont": "Cormorant+Garamond:wght@300;400",
+      "family": "'Cormorant Garamond', serif",
+      "description": "ロゴ・英語見出し：細めの上品なセリフ体"
+    },
+    "japaneseHeading": {
+      "googleFont": "Noto+Serif+JP:wght@300;400",
+      "family": "'Noto Serif JP', serif",
+      "description": "日本語見出し：明朝体"
+    },
+    "japaneseBody": {
+      "googleFont": "Noto+Sans+JP:wght@300;400",
+      "family": "'Noto Sans JP', sans-serif",
+      "description": "本文：読みやすい細めのゴシック体"
+    }
+  },
+  "filming": {
+    "fontFamily": "'Noto Serif JP', serif",
+    "color": "#eae6e0",
+    "backgroundColor": "#333333",
+    "description": "「撮影中」の画面の設定"
+  }
+}

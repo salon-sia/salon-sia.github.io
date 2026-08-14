@@ -1,0 +1,36 @@
+{
+  "name": "Sia Total Beauty Salon",
+  "nameSub": "since 2026 · Chino, Nagano",
+  "contact": {
+    "address": "〒391-0005 長野県茅野市仲町23番36-1号",
+    "phone": "0266-00-0000",
+    "businessHours": [
+      "Hair：09:00〜20:00",
+      "Eyelash：09:00〜17:00",
+      "Nail：09:00〜17:00"
+    ],
+    "holiday": "年中無休（臨時休業あり）",
+    "googleMapUrl": "https://maps.app.goo.gl/Xyyk9ams5UPyJhwi8",
+    "mapNote": "JR中央線 茅野駅より徒歩13分 または 中央道 茅野ICより車で7分"
+  },
+  "hero": {
+    "subtitle": "Sia Total Beauty Salon",
+    "tagline": "茅野エリア人気上位サロン☆口コミ4.9以上☆完全マンツーマン",
+    "backgroundImage": "https://imgbp.hotp.jp/CSP/IMG_SRC/70/57/B126357057/B126357057.jpg?impolicy=HPB_policy_default&w=1920&h=1080",
+    "reserveBtnText": "ご予約はこちら",
+    "menuBtnText": "メニューを見る"
+  },
+  "navigation": [
+    {"name":"コンセプト","url":"#concept"},
+    {"name":"サービス","url":"#services"},
+    {"name":"メニュー","url":"#menu"},
+    {"name":"スタッフ","url":"#staff"},
+    {"name":"ギャラリー","url":"#gallery"},
+    {"name":"アクセス","url":"#access"},
+    {"name":"ご予約・お問い合わせ","url":"#contact","isButton":true}
+  ],
+  "footer": {
+    "description": "茅野エリア人気上位サロン☆口コミ4.9以上。実力派スタイリストが完全マンツーマンで、あなたの理想を形にします。",
+    "copyright": "© 2026 Sia Total Beauty Salon. All Rights Reserved."
+  }
+}

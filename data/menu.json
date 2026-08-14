@@ -1,0 +1,197 @@
+{
+  "salon": {
+    "name": "吉祥寺 はるへ",
+    "tagline": "吉祥寺エリア人気上位サロン☆口コミ4.9以上☆完全マンツーマン"
+  },
+  "categories": [
+    {
+      "id": "coupon",
+      "name": "おすすめクーポン",
+      "icon": "🎫",
+      "items": [
+        {
+          "id": "c1",
+          "name": "【人気No.1】カット＋美髪カラー＋質感改善トリートメント",
+          "description": "はるへの人気No.1クーポン。髪質改善に特化した美髪カラーでダメージを軽減し、最高の手触りを体験してください。",
+          "price": 13400,
+          "duration": 120,
+          "popular": true
+        },
+        {
+          "id": "c2",
+          "name": "【梅雨限定】縮毛矯正＋髪質改善トリートメント",
+          "description": "縮毛矯正と髪質改善トリートメントのメニューになります。梅雨を乗り切って快適に過ごしましょう♪",
+          "price": 19800,
+          "duration": 180,
+          "popular": true
+        },
+        {
+          "id": "c3",
+          "name": "【新規限定】メンズカット＋パーマ",
+          "description": "波巻き・ツイスパ・サーフカールなど流行り全対応◎朝のセットも簡単にキマるスタイルへ。",
+          "price": 11400,
+          "duration": 120,
+          "popular": false
+        }
+      ]
+    },
+    {
+      "id": "hair",
+      "name": "Hair",
+      "icon": "💇",
+      "items": [
+        {
+          "id": "hair_special",
+          "name": "Hair",
+          "description": "特別Hairメニュー",
+          "price": 5500,
+          "duration": 30,
+          "popular": true
+        }
+      ]
+    },
+    {
+      "id": "eyelash",
+      "name": "Eyelash",
+      "icon": "👁️",
+      "items": [
+        {
+          "id": "eyelash_special",
+          "name": "Eyelash",
+          "description": "特別Eyelashメニュー",
+          "price": 5500,
+          "duration": 30,
+          "popular": true
+        }
+      ]
+    },
+    {
+      "id": "nail",
+      "name": "Nail",
+      "icon": "💅",
+      "items": [
+        {
+          "id": "nail_special",
+          "name": "Nail",
+          "description": "特別Nailメニュー",
+          "price": 5500,
+          "duration": 30,
+          "popular": true
+        }
+      ]
+    },
+    {
+      "id": "cut",
+      "name": "カット",
+      "icon": "✂️",
+      "items": [
+        {
+          "id": "cut_basic",
+          "name": "デザインカット",
+          "description": "シャンプー・ブロー込。お客様の骨格や髪質に合わせた再現性の高いカットをご提供します。",
+          "price": 5500,
+          "duration": 60,
+          "popular": false
+        },
+        {
+          "id": "cut_student",
+          "name": "【学割U24】カット",
+          "description": "学生限定のお得なカットプランです。",
+          "price": 3900,
+          "duration": 60,
+          "popular": false
+        }
+      ]
+    },
+    {
+      "id": "color",
+      "name": "カラー",
+      "icon": "🎨",
+      "items": [
+        {
+          "id": "color_full",
+          "name": "美髪フルカラー",
+          "description": "ダメージを最小限に抑え、艶のある美しい髪色に仕上げます。",
+          "price": 7700,
+          "duration": 90,
+          "popular": true
+        },
+        {
+          "id": "color_care",
+          "name": "プレミアムケアカラー",
+          "description": "より高いケア成分を配合したカラー剤で、透明感と艶を両立します。",
+          "price": 9900,
+          "duration": 90,
+          "popular": false
+        }
+      ]
+    },
+    {
+      "id": "perm",
+      "name": "パーマ・縮毛矯正",
+      "icon": "🌀",
+      "items": [
+        {
+          "id": "perm_basic",
+          "name": "デザインパーマ",
+          "description": "お客様のなりたいイメージに合わせて、最適なパーマをご提案します。",
+          "price": 11000,
+          "duration": 120,
+          "popular": false
+        },
+        {
+          "id": "straight",
+          "name": "美髪縮毛矯正",
+          "description": "髪の広がりを抑え、柔らかくしなやかなストレートヘアを実現します。",
+          "price": 16500,
+          "duration": 180,
+          "popular": true
+        }
+      ]
+    },
+    {
+      "id": "treatment",
+      "name": "トリートメント",
+      "icon": "✨",
+      "items": [
+        {
+          "id": "tr_quality",
+          "name": "質感改善トリートメント",
+          "description": "髪の内部から補修し、驚くほどの手触りと艶を実現します。",
+          "price": 6600,
+          "duration": 45,
+          "popular": true
+        },
+        {
+          "id": "tr_acid",
+          "name": "アルカリ酸熱トリートメント",
+          "description": "本格的な髪質改善を求める方に。うねりや広がりを芯から補修します。",
+          "price": 11400,
+          "duration": 60,
+          "popular": false
+        }
+      ]
+    },
+    {
+      "id": "spa",
+      "name": "ヘッドスパ",
+      "icon": "💆",
+      "items": [
+        {
+          "id": "spa_carbonic",
+          "name": "高濃度炭酸泉スパ",
+          "description": "炭酸の力で頭皮の汚れをスッキリ落とし、血行を促進します。",
+          "price": 5500,
+          "duration": 30,
+          "popular": true
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "表示価格はすべて税込みです。",
+    "ロング料金はございません。",
+    "当日予約も可能です。お気軽にお問い合わせください。",
+    "完全マンツーマン施術のため、予約優先制となっております。"
+  ]
+}

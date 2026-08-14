@@ -1,0 +1,27 @@
+{
+  "subtitle": "Our Concept",
+  "title": "コンセプト 09",
+  "image": "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=800",
+  "paragraphs": [
+    "ここにはコンセプトの本文が入ります。JSONファイルを編集して内容を更新してください。"
+  ],
+  "features": [
+    {
+      "icon": "✨",
+      "title": "特徴1",
+      "description": "特徴の説明がここに入ります"
+    },
+    {
+      "icon": "🌿",
+      "title": "特徴2",
+      "description": "特徴の説明がここに入ります"
+    }
+  ],
+  "links": [
+    {
+      "color": "#4a5859",
+      "title": "お問い合わせフォーム",
+      "url": "CONTACT"
+    }
+  ]
+}

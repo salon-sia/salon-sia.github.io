@@ -1,0 +1,25 @@
+{
+  "subtitle": "Contact & Reservation",
+  "title": "ご予約・お問い合わせ",
+  "description": "ご予約・ご質問はお電話またはフォームよりお気軽にお問い合わせください。<br>ホットペッパービューティーからのネット予約も承っております。",
+  "form": {
+    "nameLabel": "お名前",
+    "phoneLabel": "電話番号",
+    "emailLabel": "メールアドレス",
+    "serviceLabel": "ご希望のサービス",
+    "messageLabel": "メッセージ・ご要望",
+    "submitButton": "お問い合わせを送信する",
+    "services": [
+      { "value": "", "text": "選択してください" },
+      { "value": "hair", "text": "Hair" },
+      { "value": "eyelash", "text": "Eyelash" },
+      { "value": "nail", "text": "Nail" },
+      { "value": "cut", "text": "カット" },
+      { "value": "color", "text": "美髪カラー" },
+      { "value": "perm", "text": "パーマ・縮毛矯正" },
+      { "value": "treatment", "text": "髪質改善トリートメント" },
+      { "value": "spa", "text": "ヘッドスパ" },
+      { "value": "other", "text": "その他・複数" }
+    ]
+  }
+}

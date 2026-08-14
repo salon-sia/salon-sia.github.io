@@ -1,0 +1,18 @@
+{
+  "subtitle": "Access",
+  "title": "アクセス・店舗情報",
+  "infoDisplay": [
+    {
+      "label": "アクセス",
+      "content": "JR中央線 茅野駅より徒歩13分<BR>　　または<br>中央道 茅野ICより車で7分"
+    },
+    {
+      "label": "駐車場",
+      "content": "6台"
+    },
+    {
+      "label": "支払方法",
+      "content": "現金／クレジットカード<br> ／各種キャッシュレス決済"
+    }
+  ]
+}
