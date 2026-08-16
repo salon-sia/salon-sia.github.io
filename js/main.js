@@ -12,9 +12,9 @@ let staffData = [];
 let pendingContactStaffId = null;
 const serviceDetailCache = new Map();
 const conceptSectionIds = Array.from({ length: 10 }, (_, index) => `concept${String(index + 1).padStart(2, '0')}`);
-const wu1 = "T0BQK526KKK";
-const wu2 = "B0BQ24X6UTZ";
-const wu3 = "Ib3B4tuI6TiaD85me58WqYH4";
+const wu1 = "XXXXXXXXXXX";
+const wu2 = "TTTTTTTTTTT";
+const wu3 = "ZZZZZZZZZZZZZZZZZZZZZZZZ";
 
 function getFirstConceptSection() {
   return Array.from(document.querySelectorAll('section[id]'))
