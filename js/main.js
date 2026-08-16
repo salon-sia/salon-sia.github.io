@@ -1187,6 +1187,124 @@ async function renderAccessSection() {
   }
 }
 
+function padNumber(value) {
+  return String(value).padStart(2, '0');
+}
+
+function formatSubmissionDate(date = new Date()) {
+  return `${date.getFullYear()}年${padNumber(date.getMonth() + 1)}月${padNumber(date.getDate())}日 ${padNumber(date.getHours())}時${padNumber(date.getMinutes())}分${padNumber(date.getSeconds())}秒`;
+}
+
+function detectBrowserName() {
+  const userAgent = navigator.userAgent || '';
+  if (/Edg\//.test(userAgent)) return 'Microsoft Edge';
+  if (/OPR\//.test(userAgent)) return 'Opera';
+  if (/Chrome\//.test(userAgent) && !/Edg\//.test(userAgent)) return 'Google Chrome';
+  if (/Firefox\//.test(userAgent)) return 'Mozilla Firefox';
+  if (/Safari\//.test(userAgent) && !/Chrome\//.test(userAgent)) return 'Safari';
+  return '取得不可';
+}
+
+function detectOperatingSystem() {
+  const userAgent = navigator.userAgent || '';
+  if (/Windows NT/.test(userAgent)) return 'Windows';
+  if (/Android/.test(userAgent)) return 'Android';
+  if (/(iPhone|iPad|iPod)/.test(userAgent)) return 'iOS';
+  if (/Mac OS X/.test(userAgent)) return 'macOS';
+  if (/Linux/.test(userAgent)) return 'Linux';
+  return '取得不可';
+}
+
+async function fetchTextWithTimeout(url, options = {}, timeoutMs = 5000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal, cache: 'no-store' });
+    return response;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function fetchPublicIp(url) {
+  try {
+    const response = await fetchTextWithTimeout(url);
+    if (!response.ok) return '取得不可';
+    const data = await response.json();
+    return data.ip || '取得不可';
+  } catch (error) {
+    console.warn(`Public IP lookup failed: ${url}`, error);
+    return '取得不可';
+  }
+}
+
+async function resolveServerIp(hostname, recordType) {
+  if (!hostname || hostname === 'localhost' || /^(127\.|10\.|192\.168\.)/.test(hostname) || hostname.includes(':')) {
+    return '取得不可（静的Webサイト）';
+  }
+
+  try {
+    const dnsUrl = `https://dns.google/resolve?name=${encodeURIComponent(hostname)}&type=${recordType}`;
+    const response = await fetchTextWithTimeout(dnsUrl);
+    if (!response.ok) return '取得不可';
+    const data = await response.json();
+    const answer = (data.Answer || []).find(item => item.type === recordType);
+    return answer?.data || '取得不可';
+  } catch (error) {
+    console.warn(`Server ${recordType} lookup failed`, error);
+    return '取得不可';
+  }
+}
+
+async function collectSystemManagementData() {
+  const hostname = window.location.hostname || '';
+  const [clientIpv4, clientIpv6, serverIpv4, serverIpv6] = await Promise.all([
+    fetchPublicIp('https://api.ipify.org?format=json'),
+    fetchPublicIp('https://api6.ipify.org?format=json'),
+    resolveServerIp(hostname, 1),
+    resolveServerIp(hostname, 28)
+  ]);
+
+  return {
+    submittedAt: formatSubmissionDate(),
+    clientIpv4,
+    clientIpv6,
+    browser: detectBrowserName(),
+    operatingSystem: detectOperatingSystem(),
+    serverIpv4,
+    serverIpv6,
+    serverOperatingSystem: '取得不可（静的Webサイト）',
+    serverSystemName: hostname || '取得不可'
+  };
+}
+
+function buildWebhookMessage(formData, systemData) {
+  const name = formData.name.trim();
+  const phone = formData.phone.trim() || '未記入';
+  const email = formData.email.trim() || '未記入';
+  const service = formData.service.trim();
+  const message = formData.message.trim();
+
+  return [
+    `【お名前】 ${name} 様よりお問い合わせを受け付けました。`,
+    `【お電話番号】 ${phone}`,
+    `【メールアドレス】 ${email}`,
+    `【ご希望のサービス】${service}`,
+    `【メッセージ・ご要望】 ${message}`,
+    '＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝',
+    '【システム管理データ】',
+    `・送信ボタン押下日時 ${systemData.submittedAt}`,
+    `・送信者 IPv4アドレス ${systemData.clientIpv4}`,
+    `・送信者 IPv6アドレス ${systemData.clientIpv6}`,
+    `・送信者Webブラウザ名 ${systemData.browser}`,
+    `・送信者OS名 ${systemData.operatingSystem}`,
+    `・Webサーバ IPv4アドレス ${systemData.serverIpv4}`,
+    `・Webサーバ IPv6アドレス ${systemData.serverIpv6}`,
+    `・WebサーバOS名 ${systemData.serverOperatingSystem}`,
+    `・Webサーバのサーバシステム名 ${systemData.serverSystemName}`
+  ].join('\n');
+}
+
 // ===== Render Contact Section =====
 async function renderContactSection() {
   try {
@@ -1250,18 +1368,72 @@ async function renderContactSection() {
     // Attach form event
     const form = document.getElementById('contact-form');
     if (form) {
-      form.addEventListener('submit', (e) => {
+      const nameInput = document.getElementById('name');
+      const phoneInput = document.getElementById('phone');
+      const emailInput = document.getElementById('email');
+      const serviceSelect = document.getElementById('service');
+      const messageInput = document.getElementById('message');
+      const validationFields = [nameInput, phoneInput, emailInput, serviceSelect].filter(Boolean);
+
+      validationFields.forEach(field => {
+        const eventName = field === serviceSelect ? 'change' : 'input';
+        field.addEventListener(eventName, () => field.classList.remove('validation-error'));
+      });
+
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = form.querySelector('.form-submit .btn');
-        btn.textContent = '送信しました！';
-        btn.style.background = '#4caf50';
+        const name = nameInput?.value.trim() || '';
+        const phone = phoneInput?.value.trim() || '';
+        const email = emailInput?.value.trim() || '';
+        const serviceValue = serviceSelect?.value.trim() || '';
+        const service = serviceSelect?.selectedOptions?.[0]?.textContent.trim() || serviceValue;
+        const message = messageInput?.value || '';
+        let firstInvalidField = null;
+
+        validationFields.forEach(field => field.classList.remove('validation-error'));
+        const markInvalid = field => {
+          if (!field) return;
+          field.classList.add('validation-error');
+          if (!firstInvalidField) firstInvalidField = field;
+        };
+
+        if (!name) markInvalid(nameInput);
+        if (!serviceValue) markInvalid(serviceSelect);
+        if (!phone && !email) {
+          markInvalid(phoneInput);
+          markInvalid(emailInput);
+        }
+        if (firstInvalidField) {
+          firstInvalidField.focus();
+          return;
+        }
+
         btn.disabled = true;
-        setTimeout(() => {
+        btn.textContent = '送信中…';
+
+        try {
+          const targetConfig = await fetchJsonFile('./data/targetURL.json');
+          const webhookUrl = String(targetConfig.webhookUrl || targetConfig.url || '').trim();
+          if (!webhookUrl) throw new Error('Webhook URL is not configured');
+
+          const systemData = await collectSystemManagementData();
+          const varSiaTestData = buildWebhookMessage({ name, phone, email, service, message }, systemData);
+          await fetch(webhookUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify({ text: varSiaTestData })
+          });
+          console.log('送信完了（no-corsのためレスポンスの成否は判定不可）');
           form.reset();
+          if (messageInput) delete messageInput.dataset.staffContactTemplate;
+        } catch (error) {
+          console.error('通信エラー:', error);
+        } finally {
           btn.textContent = data.form.submitButton;
           btn.style.background = '';
           btn.disabled = false;
-        }, 3000);
+        }
       });
     }
 
