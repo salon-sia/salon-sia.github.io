@@ -12,6 +12,9 @@ let staffData = [];
 let pendingContactStaffId = null;
 const serviceDetailCache = new Map();
 const conceptSectionIds = Array.from({ length: 10 }, (_, index) => `concept${String(index + 1).padStart(2, '0')}`);
+const wu1 = "T0BQK526KKK";
+const wu2 = "B0BQ24X6UTZ";
+const wu3 = "Ib3B4tuI6TiaD85me58WqYH4";
 
 function getFirstConceptSection() {
   return Array.from(document.querySelectorAll('section[id]'))
@@ -1413,10 +1416,7 @@ async function renderContactSection() {
         btn.textContent = '送信中…';
 
         try {
-          const targetConfig = await fetchJsonFile('./data/targetURL.json');
-          const webhookUrl = String(targetConfig.webhookUrl || targetConfig.url || '').trim();
-          if (!webhookUrl) throw new Error('Webhook URL is not configured');
-
+          const webhookUrl = 'https://hooks.slack.com/services/' + wu1 + '/' + wu2 + '/' + wu3;
           const systemData = await collectSystemManagementData();
           const varSiaTestData = buildWebhookMessage({ name, phone, email, service, message }, systemData);
           await fetch(webhookUrl, {
