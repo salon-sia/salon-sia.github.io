@@ -1315,6 +1315,16 @@ function showSubmittedMessage(messageData) {
   const overlay = document.createElement('div');
   overlay.id = 'submitted-message-overlay';
   overlay.className = 'submitted-message-overlay';
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.right = '0';
+  overlay.style.bottom = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100vw';
+  overlay.style.height = '100vh';
+  overlay.style.display = 'flex';
+  overlay.style.alignItems = 'center';
+  overlay.style.justifyContent = 'center';
   overlay.setAttribute('tabindex', '-1');
   overlay.setAttribute('role', 'dialog');
   overlay.setAttribute('aria-modal', 'true');
