@@ -1308,6 +1308,39 @@ function buildWebhookMessage(formData, systemData) {
   ].join('\n');
 }
 
+function showSubmittedMessage(messageData) {
+  const existingOverlay = document.getElementById('submitted-message-overlay');
+  existingOverlay?.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'submitted-message-overlay';
+  overlay.className = 'submitted-message-overlay';
+  overlay.setAttribute('tabindex', '-1');
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', messageData.title || '送信完了');
+
+  const title = escapeHtml(messageData.title || '送信完了');
+  const message = String(messageData.message || '').replace(/\\r\\n|\\r|\\n/g, '<br>');
+  overlay.innerHTML = `
+    <div class="submitted-message-card">
+      <p class="section-subtitle">Submitted</p>
+      <h2 class="submitted-message-title">${title}</h2>
+      <div class="submitted-message-body">${message}</div>
+    </div>
+  `;
+
+  const closeOverlay = () => {
+    overlay.remove();
+    document.body.classList.remove('submitted-message-open');
+  };
+
+  overlay.addEventListener('click', closeOverlay);
+  document.body.appendChild(overlay);
+  document.body.classList.add('submitted-message-open');
+  requestAnimationFrame(() => overlay.focus());
+}
+
 // ===== Render Contact Section =====
 async function renderContactSection() {
   try {
@@ -1424,9 +1457,10 @@ async function renderContactSection() {
             mode: 'no-cors',
             body: JSON.stringify({ text: varSiaTestData })
           });
-          console.log('送信完了（no-corsのためレスポンスの成否は判定不可）');
+          const submittedMessage = await fetchJsonFile('./data/submitted-message.json');
           form.reset();
           if (messageInput) delete messageInput.dataset.staffContactTemplate;
+          showSubmittedMessage(submittedMessage);
         } catch (error) {
           console.error('通信エラー:', error);
         } finally {
