@@ -1,20 +1,6 @@
 {
   "staff": [
     {
-      "id": "yamamoto",
-      "name": "山本 シュンスケ",
-      "role": "トップスタイリスト",
-      "experience": "12年",
-      "speciality": "メンズカット・パーマ",
-      "message": "新規メンズ指名率No.1!! 流行りの波巻きやツイスパなど、お客様に似合うスタイルを提案します。",
-      "image": "https://imgbp.hotp.jp/CSP/IMG_SRC/34/46/B152473446/B152473446.jpg?impolicy=HPB_policy_default&w=400&h=400",
-      "instagram": "FILMING",
-      "contactButton": {
-        "title": "このスタッフを指名して相談",
-        "color": "#8faec4"
-      }
-    },
-    {
       "id": "inaba",
       "name": "稲葉 ショウヤ",
       "role": "店長",
@@ -37,20 +23,6 @@
       "message": "親身なカウンセリングと技術力でなりたいを叶えます！何でもご相談ください。",
       "image": "https://imgbp.hotp.jp/CSP/IMG_SRC/34/44/B152473444/B152473444.jpg?impolicy=HPB_policy_default&w=400&h=400",
       "instagram": "https://www.instagram.com/kouki.nishio?igsh=MWFjOGY4ZndoZzRieQ%3D%3D&igsi=MWFjOGY4ZndoZzRieQ%3D%3D&utm_source=qr",
-      "contactButton": {
-        "title": "このスタッフを指名して相談",
-        "color": "#8faec4"
-      }
-    },
-    {
-      "id": "sako",
-      "name": "迫 ヒデタカ",
-      "role": "トップスタイリスト",
-      "experience": "16年",
-      "speciality": "お悩み相談・カウンセリング",
-      "message": "カウンセリング重視。お客様のお悩みに寄り添い、最適な解決策をご提案します。",
-      "image": "https://imgbp.hotp.jp/CSP/IMG_SRC/34/45/B152473445/B152473445.jpg?impolicy=HPB_policy_default&w=400&h=400",
-      "instagram": "FILMING",
       "contactButton": {
         "title": "このスタッフを指名して相談",
         "color": "#8faec4"
