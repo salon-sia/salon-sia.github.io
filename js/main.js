@@ -5,6 +5,7 @@
 
 let salonData = {};
 let siteDesignData = {};
+let contactData = { 'jump-section': 'CONTACT' };
 let menuData = null;
 let pendingMenuId = null;
 let pendingContactServiceValue = null;
@@ -15,6 +16,27 @@ const conceptSectionIds = Array.from({ length: 10 }, (_, index) => `concept${Str
 const wu1 = "T0BQK526KKK";
 const wu2 = "B0BQ24X6UTZ";
 const wu3 = "Ib3B4tuI6TiaD85me58WqYH4";
+
+const staffSocialDefinitions = [
+  { key: 'facebook', label: 'Facebook', icon: '🄵', className: 'staff-facebook-icon', aliases: ['facebook'] },
+  { key: 'x', label: 'X', icon: '𝕏', className: 'staff-x-icon', aliases: ['x'] },
+  { key: 'pinterest', label: 'Pinterest', icon: '📌', className: 'staff-pinterest-icon', aliases: ['pinterest'] },
+  { key: 'youtube', label: 'YouTube', icon: '▶️', className: 'staff-youtube-icon', aliases: ['youtube'] },
+  { key: 'tiktok', label: 'TikTok', icon: '🎵', className: 'staff-tiktok-icon', aliases: ['tiktok'] },
+  { key: 'bereal', label: 'BeReal', icon: '⏱️', className: 'staff-bereal-icon', aliases: ['bereal', 'beReal'] },
+  { key: 'github', label: 'GitHub', icon: '🐱', className: 'staff-github-icon', aliases: ['github'] },
+  { key: 'whatsapp', label: 'WhatsApp', icon: '📞', className: 'staff-whatsapp-icon', aliases: ['whatsapp'] },
+  { key: 'wechat', label: 'WeChat', icon: '👥', className: 'staff-wechat-icon', aliases: ['wechat'] },
+  { key: 'threads', label: 'Threads', icon: '🌀', className: 'staff-threads-icon', aliases: ['threads'] },
+  { key: 'line', label: 'Line', icon: '💬', className: 'staff-line-icon', aliases: ['line'] }
+];
+
+function getStaffSocialValue(member, definition) {
+  const matchingKey = Object.keys(member || {}).find(key =>
+    definition.aliases.some(alias => key.toLowerCase() === alias.toLowerCase())
+  );
+  return matchingKey ? String(member[matchingKey] ?? '').trim() : '';
+}
 
 function getFirstConceptSection() {
   return Array.from(document.querySelectorAll('section[id]'))
@@ -107,9 +129,16 @@ function initializeStaffContactNavigation() {
     if (!target) return;
     if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
 
-    event.preventDefault();
-    event.stopPropagation();
     applyStaffContactMessage(target.getAttribute('data-contact-staff-id') || '');
+    event.stopPropagation();
+
+    const href = target.getAttribute('href') || '#contact';
+    if (href.startsWith('#')) {
+      event.preventDefault();
+      requestAnimationFrame(() => {
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
   };
 
   document.addEventListener('click', handleStaffContact, true);
@@ -141,7 +170,7 @@ function initializeConceptAnchorNavigation() {
 
 document.addEventListener('DOMContentLoaded', () => {
   // Load salon.json and site-design.json before rendering the page
-  Promise.all([loadSalonData(), loadSiteDesign()]).then(() => {
+  Promise.all([loadSalonData(), loadSiteDesign(), loadContactData()]).then(() => {
     renderHeader();
     renderHero();
     renderConceptSections();
@@ -193,6 +222,32 @@ async function loadSiteDesign() {
     console.error('Site design load error:', err);
     return {};
   }
+}
+
+// ===== Load Contact Navigation Data =====
+async function loadContactData() {
+  try {
+    const response = await fetch(`./data/contact.json?ts=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error('Failed to load contact.json');
+    const data = await response.json();
+    contactData = data && typeof data === 'object' ? data : { 'jump-section': 'CONTACT' };
+    return contactData;
+  } catch (err) {
+    console.error('Contact navigation load error:', err);
+    contactData = { 'jump-section': 'CONTACT' };
+    return contactData;
+  }
+}
+
+function getContactJumpHref() {
+  const requestedId = String(contactData?.['jump-section'] ?? 'CONTACT')
+    .trim()
+    .replace(/^index\.html#/i, '')
+    .replace(/^#/, '')
+    .toLowerCase();
+  const targetSection = Array.from(document.querySelectorAll('section[id]'))
+    .find(section => section.id.toLowerCase() === (requestedId || 'contact'));
+  return targetSection ? `#${targetSection.id}` : '#contact';
 }
 
 function applySiteDesign(design) {
@@ -300,7 +355,8 @@ function renderHeader() {
   
   let navHtml = '<ul class="nav-links" id="nav-links">';
   salonData.navigation?.forEach(item => {
-    navHtml += `<li><a href="${item.url}" class="${item.isButton ? 'nav-reserve-btn' : ''}">${item.name}</a></li>`;
+    const href = item.isButton ? getContactJumpHref() : item.url;
+    navHtml += `<li><a href="${escapeHtml(href || '#')}" class="${item.isButton ? 'nav-reserve-btn' : ''}">${escapeHtml(item.name || '')}</a></li>`;
   });
   navHtml += '</ul>';
 
@@ -363,7 +419,7 @@ function renderHero() {
       </h1>
       <p class="hero-tagline">${escapeHtml(heroData.tagline)}</p>
       <div class="hero-buttons">
-        <a href="#contact" class="btn btn-primary">${escapeHtml(heroData.reserveBtnText)}</a>
+        <a href="${escapeHtml(getContactJumpHref())}" class="btn btn-primary">${escapeHtml(heroData.reserveBtnText)}</a>
         <a href="#menu" class="btn btn-outline">${escapeHtml(heroData.menuBtnText)}</a>
       </div>
     </div>
@@ -888,26 +944,68 @@ async function renderStaffSection() {
     
     let staffHtml = '';
     data.staff?.forEach(member => {
+      // Instagram remains special: its URL also makes the staff photo clickable.
       const instagramValue = String(member.instagram || '').trim();
-      const isFilming = instagramValue.toUpperCase() === 'FILMING';
-      const contactButton = member.contactButton || {};
-      const contactButtonHtml = `
-        <button type="button" class="staff-contact-button" data-contact-staff-id="${escapeHtml(member.id)}" style="--staff-contact-color:${escapeHtml(contactButton.color || '#8faec4')}">
-          ${escapeHtml(contactButton.title || 'このスタッフを指名して相談')}
-        </button>
-      `;
-      const cardContent = `
+      const isInstagramFilming = instagramValue.toUpperCase() === 'FILMING';
+      const socialEntries = staffSocialDefinitions.map(definition => ({
+        definition,
+        value: getStaffSocialValue(member, definition)
+      })).filter(entry => entry.value);
+      const hasFilmingSocial = isInstagramFilming || socialEntries.some(entry => entry.value.toUpperCase() === 'FILMING');
+      const isFilming = hasFilmingSocial;
+
+      let staffImageHtml = `
         <div class="staff-card-image">
-          <img src="${member.image}" alt="${escapeHtml(member.name)}" loading="lazy"
+          <img src="${escapeHtml(member.image || '')}" alt="${escapeHtml(member.name || '')}" loading="lazy"
             onerror="this.src='https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=400&fit=crop'">
         </div>
+      `;
+      if (instagramValue && !isInstagramFilming) {
+        staffImageHtml = `
+          <a href="${escapeHtml(instagramValue)}" target="_blank" rel="noopener noreferrer" class="staff-image-link">
+            ${staffImageHtml}
+          </a>
+        `;
+      }
+
+      const socialLinksHtml = socialEntries.map(({ definition, value }) => {
+        const iconText = `${definition.icon} ${definition.label}`;
+        return value.toUpperCase() === 'FILMING'
+          ? `<div class="${definition.className} filming-social-icon">${iconText}</div>`
+          : `<a href="${escapeHtml(value)}" target="_blank" rel="noopener noreferrer" class="${definition.className}">${iconText}</a>`;
+      }).join('');
+      const instagramHtml = instagramValue
+        ? (isInstagramFilming
+          ? '<div class="staff-insta-icon filming-social-icon">📷 Instagram</div>'
+          : '<a href="' + escapeHtml(instagramValue) + '" target="_blank" rel="noopener noreferrer" class="staff-insta-link">📷 Instagram</a>')
+        : '';
+
+      // Contact Button: omitted/null means no button, while link:null falls back to CONTACT.
+      let contactButtonHtml = '';
+      const contactButton = member.contactButton && typeof member.contactButton === 'object'
+        ? member.contactButton
+        : null;
+      if (contactButton) {
+        const resolvedLink = resolveLinkTarget(contactButton.link || 'CONTACT');
+        contactButtonHtml = `
+          <a href="${escapeHtml(resolvedLink.href)}"${resolvedLink.target} class="staff-contact-button" data-contact-staff-id="${escapeHtml(member.id || '')}" style="--staff-contact-color:${escapeHtml(contactButton.color || '#8faec4')}">
+            ${escapeHtml(contactButton.title || 'このスタッフを指名して相談')}
+          </a>
+        `;
+      }
+
+      const cardContent = `
+        ${staffImageHtml}
         <div class="staff-card-body">
-          <h3 class="staff-name">${escapeHtml(member.name)}</h3>
-          <p class="staff-role">${escapeHtml(member.role)}</p>
-          <span class="staff-speciality">得意分野：${escapeHtml(member.speciality)}</span>
-          <p class="staff-message">${escapeHtml(member.message)}</p>
-          ${instagramValue ? '<div class="staff-insta-icon">📷 Instagram</div>' : ''}
-          ${contactButtonHtml}
+          <h3 class="staff-name">${escapeHtml(member.name || '')}</h3>
+          <p class="staff-role">${escapeHtml(member.role || '')}</p>
+          <span class="staff-speciality">得意分野：${escapeHtml(member.speciality || '')}</span>
+          <p class="staff-message">${escapeHtml(member.message || '')}</p>
+          <div class="staff-card-actions">
+            ${instagramHtml}
+            ${socialLinksHtml}
+            ${contactButtonHtml}
+          </div>
         </div>
       `;
 
@@ -917,12 +1015,6 @@ async function renderStaffSection() {
             <div class="filming-normal-view">${cardContent}</div>
             <div class="filming-screen" aria-hidden="true"><span>撮影中</span></div>
           </div>
-        `;
-      } else if (instagramValue) {
-        staffHtml += `
-          <a href="${escapeHtml(instagramValue)}" target="_blank" rel="noopener noreferrer" class="staff-card reveal">
-            ${cardContent}
-          </a>
         `;
       } else {
         staffHtml += `
@@ -997,6 +1089,7 @@ async function renderGallerySection() {
 function initializeFilmingTargets(root) {
   root.querySelectorAll('.filming-card').forEach(card => {
     const toggleFilmingScreen = (event) => {
+      if (event.target.closest?.('a, button, input, select, textarea')) return;
       if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
       if (event.type === 'keydown') event.preventDefault();
       const isFilming = card.classList.toggle('is-filming');
@@ -1527,7 +1620,7 @@ function renderFooter() {
           <h4>Info</h4>
           <ul>
             <li><a href="tel:${escapeHtml(phoneDigits)}">📞 ${escapeHtml(contact.phone || '')}</a></li>
-            <li><a href="#contact">✉ お問い合わせ</a></li>
+            <li><a href="${escapeHtml(getContactJumpHref())}">✉ お問い合わせ</a></li>
             <li><a href="#access">📍 ${escapeHtml(contact.mapNote || '')}</a></li>
             ${footerHoursHtml}
             <li><a href="#access">🚫 ${escapeHtml(holiday)}</a></li>
