@@ -9,21 +9,37 @@
 
 ```
 salon_website/
-├── index.html          # メインHTMLファイル
-├── css/
-│   └── style.css       # スタイルシート
-├── js/
-│   └── main.js         # JavaScriptファイル
+├── index.html                 # 動的セクションの枠だけを持つメインHTML
+├── css/style.css              # グローバル・レスポンシブ・SNS別スタイル
+├── js/main.js                 # JSON読込、描画、リンク、フォーム処理
+├── favicon.ico                # サイトアイコン
 ├── data/
-│   ├── menu.json       # メニュー・料金データ（JSONファイル）
-│   ├── staff.json      # スタッフ情報データ（JSONファイル）
-│   ├── salon.json      # 店舗基本情報
-│   ├── story.json      # OUR STORY
-│   ├── space.json      # RELAXING SPACE
-│   ├── guide.json      # FOR FIRST-TIME GUESTS
-│   └── total_beauty.json # TOTAL BEAUTY
-└── README.md           # このファイル
+│   ├── salon.json              # 店舗名・住所・営業時間などの共通情報
+│   ├── site-design.json        # 色・Google Fonts・FILMING表示設定
+│   ├── concept01.json〜06.json # CONCEPT01〜06
+│   ├── cosmetology01.json〜18.json # COSMETOLOGY01〜18
+│   ├── service.json            # サービスカード
+│   ├── service-*.json          # サービス詳細（menuid対応）
+│   ├── menu.json               # メニュー・料金カテゴリ
+│   ├── staff.json              # スタッフ・Instagram・複数SNS
+│   ├── gallery.json            # サムネイルとInstagram導線
+│   ├── faq.json                # FAQ項目
+│   ├── access.json             # 地図・アクセス補足
+│   ├── reserve-link.json       # 予約ボタン配列
+│   ├── story.json/space.json/guide.json/total_beauty.json
+│   │                            # 追加エディトリアルセクション
+│   ├── final_message.json      # FINAL MESSAGE
+│   ├── reservation.json        # CONTACTフォーム
+│   ├── contact.json            # ご予約・お問い合わせボタンの遷移先
+│   └── submitted-message.json  # 送信後メッセージ
+├── administration/
+│   ├── data-management-tools.html # 管理者向けデータ加工ツール
+│   ├── data-files.json             # 管理対象JSONマニフェスト
+│   └── js/vendor/                  # Excel・ZIP処理ライブラリ
+└── README.md                       # このファイル
 ```
+
+`concept.json` は使用せず、CONCEPTは `concept01.json`〜`concept06.json` で管理します。JSONファイルの追加・削除やセクションの表示・非表示は、READMEの各説明と `index.html` の対応セクションを確認して行ってください。
 
 ## 使い方
 
@@ -37,6 +53,18 @@ cd salon_website
 python3 -m http.server 8080
 # ブラウザで http://localhost:8080 を開く
 ```
+
+## 管理者向けデータ管理ツール
+
+`administration/data-management-tools.html` は、サイト本体からリンクされていない管理者向けの単独ページです。一般利用者が偶然アクセスしにくい構成ですが、静的HTMLに実装した簡易認証であるため、ソースコードを閲覧できる開発者に対する本格的なアクセス制御ではありません。運用上の機密性が必要な場合は、GitHub Pagesなどのホスティング側でアクセス制限を追加してください。
+
+ページを開くとログイン画面だけが表示され、管理画面は表示されません。初期パスワードは `サイトオーナーのアカウント-admin` です。パスワードは `administration/data-management-tools.html` 冒頭の `MANAGEMENT_PASSWORD` を変更してください。ログイン成功後の認証状態は `sessionStorage` に保存され、同じブラウザタブのセッション中のみ保持されます。ログアウトまたはブラウザタブを閉じると認証状態は破棄されます。
+
+管理画面の「Excelをダウンロード」を押すと、`administration/data-files.json` に列挙された本体側 `data/` 内の全JSONファイルを読み込み、ファイル名ごとに1枚のシートを持つ `.xlsx` を作成します。出力ファイル名は、`main.js` と同じ `systemData.serverSystemName` の取得元であるホスト名から最初のピリオドまでをサーバ識別子 `XXX` として、`XXX_salon-json-data_YYYYMMDD-HHMMSS.xlsx` の形式になります。各行は、JSON内で実際に使用されている階層だけの「階層1」以降の列と、「ノード種別」、「値」、「JSONパス」で構成されます。データが存在しない階層列はシートへ書き出しません。JSONの階層は左から右へ移動し、配列の要素は `[0]`、`[1]` の形式で表現されるため、オブジェクトのキーと配列の位置を区別しながら編集できます。
+
+編集したExcelを管理画面へドラッグ＆ドロップし、「JSON ZIPをダウンロード」を押すと、各シートをUTF-8の整形JSONへ戻し、`data/` フォルダを含むZIPを作成します。作成されたZIPを解凍し、既存サイトの `data/` フォルダへ上書きコピーしてください。Excelの「ノード種別」は `string`、`number`、`boolean`、`null`、`object`、`array` のいずれかを使用します。`number` は数値、`boolean` は `true` または `false` で入力してください。
+
+ファイル一覧は静的サイトで自動取得できないため、`administration/data-files.json` に管理対象のJSONファイル名を登録しています。JSONを追加した場合は、このマニフェストにもファイル名を追加してください。Excel・ZIP処理ライブラリは `administration/js/vendor/xlsx.full.min.js`（SheetJS CE 0.20.3）と `administration/js/vendor/jszip.min.js`（JSZip 3.10.1）として同梱し、管理HTMLから通常の `<script>` タグで読み込んでいます。
 
 ## 更新・カスタマイズ方法
 
@@ -56,7 +84,7 @@ python3 -m http.server 8080
 | 店舗名 | Sia Total Beauty Salon |
 | 住所 | 長野県茅野市仲町23番36-1号 |
 | 電話 | 0266-00-0000 |
-| 営業時間 | 平日 10:00〜20:00 / 土日祝 9:00〜19:00 |
+| 営業時間 | 平日 10:00～20:00 / 土日祝 9:00～19:00 |
 | 定休日 | 年中無休（臨時休業あり） |
 | アクセス | JR中央線 茅野駅より徒歩13分 または 中央道 茅野ICより車で7分 |
 
@@ -87,7 +115,20 @@ python3 -m http.server 8080
 
 ## Googleマップの変更
 
-`data/access.json` の `map.googleMapUrl` にGoogleマップの共有URLを指定すると、アクセス欄のマップエリア全体が新しいウィンドウで開くリンクになります。
+`data/salon.json` の `contact.googleMapUrl` にGoogleマップの共有URLを指定すると、アクセス欄にGoogleマップの埋め込みプレビューが表示され、マップ全体をクリックすると同じURLが新しいウィンドウで開きます。地図の埋め込み位置は同じ `salon.json` の住所から生成されます。
+
+## ご予約・お問い合わせボタンのジャンプ先変更
+
+`data/contact.json` の `jump-section` に、`index.html` 内の `section` の `id` を指定すると、サイト全体の「ご予約・お問い合わせ」導線のジャンプ先を切り替えられます。デフォルト値は `CONTACT` です。`CONTACT` の場合は従来どおりお問い合わせフォームへ移動します。例えば `ACCESS` に変更すると、ヘッダーの「ご予約・お問い合わせ」、ヒーローの「ご予約はこちら」、フッターの「お問い合わせ」がアクセスセクションへ移動します。
+※ ただし、お問い合わせフォームを利用する方式は、ニーズが少ないことが予想されるため、実サイトでは無効化しています。  
+
+```json
+{
+  "jump-section": "CONTACT"
+}
+```
+
+値は大文字・小文字を区別せず、`#contact` や `index.html#contact` の形式も正規化して利用できます。存在しないsection idが指定された場合は、安全のため `CONTACT` へフォールバックします。スタッフ指名ボタンや `reserve-link.json` など、個別のJSONで `CONTACT-hair` や `CONTACT-STAFF-yamamoto` のように明示されたリンクは、それぞれの機能を維持します。
 
 ## 予約リンクボタンの変更
 
@@ -96,14 +137,14 @@ python3 -m http.server 8080
 ```json
 [
   {
-    "color": "#b39b7a",
-    "title": "ホットペッパーで予約",
-    "url": "https://beauty.hotpepper.jp/slnH000433368/"
+    "color": "#6b8e23",
+    "title": "Stekinaで予約",
+    "url": "https://stekina.com/profile/J76Z-3YLZ"
   },
   {
-    "color": "#4a5859",
-    "title": "お問い合わせフォーム",
-    "url": "CONTACT"
+    "color": "#963214",
+    "title": "Instagramで予約",
+    "url": "https://ig.me/m/MonaLisaOctocat"
   }
 ]
 ```
@@ -119,7 +160,7 @@ python3 -m http.server 8080
 ・その他のご要望事項。
 ```
 
-ボタンの表示名と色はスタッフごとに変更できます。
+ボタンの表示名・リンク先・色はスタッフごとに変更できます。`link` に`index.html`で定義しているセクションID（例: `CONTACT`、`SERVICES`）を指定すると同じページ内の該当セクションへ移動します。`https://...`、`mailto:...`、`tel:...`、`//...`などRFC 3986形式のURLを指定した場合は外部リンクとして新しいウィンドウで開きます。`link` を`CONTACT`にした場合は、スタッフ名を使った指名希望テンプレートをお問い合わせフォームへ自動入力します。`link` を省略した場合も、互換性のため`CONTACT`として扱います。
 
 ```json
 {
@@ -127,10 +168,33 @@ python3 -m http.server 8080
   "name": "山本 シュンスケ",
   "contactButton": {
     "title": "このスタッフを指名して相談",
+    "link": "CONTACT",
     "color": "#8faec4"
   }
 }
 ```
+
+## お問い合わせフォームのWebhook送信機能を利用する場合の設定
+
+Webhook URLは`data/targetURL.json`では管理せず、`js/main.js`冒頭の3変数で構成します。実際のWebhookを利用する際は、次の値を置き換えてください。
+
+```js
+const wu1 = "XXXXXXXXXXX";
+const wu2 = "TTTTTTTTTTT";
+const wu3 = "ZZZZZZZZZZZZZZZZZZZZZZZZ";
+```
+
+送信時には、次のように文字列結合してURLを作成します。
+
+```js
+const webhookUrl = 'https://hooks.slack.com/services/' + wu1 + '/' + wu2 + '/' + wu3;
+```
+
+CONTACTセクションのフォーム送信時には、名前とご希望のサービスが必須です。電話番号とメールアドレスはどちらか一方が必須で、未入力側は送信データ上で`未記入`に補完されます。メッセージ・ご要望は空欄でも送信できます。入力チェックでエラーになった項目は背景を桃色に変更し、該当項目を修正すると元の背景色へ戻ります。送信データは、`{"text": varSiaTestData}`に相当するJSONを`mode: "no-cors"`のPOSTで送信します。no-corsではレスポンスの成否をブラウザから判定できないため、送信完了・失敗の結果表示は行いません。
+
+`varSiaTestData`にはフォーム入力内容に加え、送信日時、送信者のIPv4・IPv6アドレス、ブラウザ名、OS名、WebサーバーのIPv4・IPv6アドレス、サーバーOS名、サーバーシステム名を含めます。静的サイトのブラウザから取得できないサーバーOS名などは`取得不可（静的Webサイト）`となり、IP取得サービスやDNS問い合わせが利用できない場合も`取得不可`として送信します。
+
+なお、ブラウザからWebhookへ直接POSTするため、Webhook側のCORS許可状況やネットワーク環境によって送信できない場合があります。Webhook URLの構成値は`main.js`に含まれるため、実運用では中継サーバー方式などで秘匿することを推奨します。ブラウザ標準のfavicon要求による404を避けるため、添付された`favicon.ico`をルートに配置し、`index.html`から参照しています。送信完了メッセージのオーバーレイは`position: fixed`、`top/right/bottom/left: 0`、Flex中央揃えを明示し、JavaScript側にも同じ配置値を設定しています。GitHub Pagesへ反映する際は、`js/main.js`と`css/style.css`を含む最新ファイルをコミット・Pushし、Chromeでスーパーリロード（Ctrl+Shift+R）してください。
 
 ## Instagram欄に `FILMING` を指定する場合
 
@@ -143,6 +207,38 @@ python3 -m http.server 8080
 ```
 
 `instagram` に通常のURLを指定した場合は、従来どおり新しいウィンドウでInstagramを開きます。この仕様はスタッフカードとギャラリーのサムネイルの両方に適用されます。
+
+## スタッフカードの複数SNS
+
+`data/staff.json` の各スタッフに、次のキーを追加すると、値のURLへ移動するSNSボタンがスタッフカード下部に自動追加されます。キーが存在しないSNSのボタンは表示されません。
+
+| JSONキー | 表示名 | CSSクラス |
+|---|---|---|
+| `facebook` | 🄵 Facebook | `.staff-facebook-icon` |
+| `X` または `x` | 𝕏 X | `.staff-x-icon` |
+| `Pinterest` または `pinterest` | 📌 Pinterest | `.staff-pinterest-icon` |
+| `YouTube` または `youtube` | ▶️ YouTube | `.staff-youtube-icon` |
+| `TikTok` または `tiktok` | 🎵 TikTok | `.staff-tiktok-icon` |
+| `BeReal` または `bereal` | ⏱️ BeReal | `.staff-bereal-icon` |
+| `GitHub` または `github` | 🐱 GitHub | `.staff-github-icon` |
+| `WhatsApp` または `whatsapp` | 📞 WhatsApp | `.staff-whatsapp-icon` |
+| `WeChat` または `wechat` | 👥 WeChat | `.staff-wechat-icon` |
+| `Threads` または `threads` | 🌀 Threads | `.staff-threads-icon` |
+| `Line` または `line` | 💬 Line | `.staff-line-icon` |
+
+URLを通常のRFC 3986形式で指定すると、新しいウィンドウで開きます。値に `FILMING` を指定すると、そのSNSはリンクではなく撮影中バッジになり、スタッフカードをクリックしたときにカード全体が「撮影中」画面へ切り替わります。撮影中画面を再度クリックすると元に戻ります。Instagramを含め、いずれか1つでも `FILMING` が指定されたスタッフカードはこの切替対象になります。
+
+```json
+{
+  "id": "nishio",
+  "instagram": "https://www.instagram.com/",
+  "facebook": "https://www.facebook.com/",
+  "X": "https://x.com/",
+  "YouTube": "FILMING"
+}
+```
+
+各ボタンの外観は `css/style.css` の専用クラスで個別に上書きできます。共通のボタンレイアウトは `.staff-card-actions` で定義しており、SNS数が増えた場合は横方向に折り返して表示します。
 
 ## site-design.jsonによるデザイン設定
 
@@ -178,9 +274,9 @@ salon.json
     └── mapNote                  アクセス案内
 ```
 
-## CONCEPT01〜10の反映箇所
+## CONCEPT01〜06の反映箇所
 
-`data/concept01.json` から `data/concept10.json` は、`index.html` の `<!-- ========== CONCEPT01 ========== -->` から `<!-- ========== CONCEPT10 ========== -->` に対応する各コンセプトセクションへ反映されます。`subtitle` と `title` はセクション見出し、`image` はイメージ画像のURL、`paragraphs` は本文、`features` は特徴カード、`links` は下部のリンクボタンとして表示されます。
+`data/concept01.json` から `data/concept06.json` は、`index.html` の `<!-- ========== CONCEPT01 ========== -->` から `<!-- ========== CONCEPT06 ========== -->` に対応する各コンセプトセクションへ反映されます。`subtitle` と `title` はセクション見出し、`image` はイメージ画像のURL、`paragraphs` は本文、`features` は特徴カード、`links` は下部のリンクボタンとして表示されます。
 
 ## JSON変更がブラウザに反映されない場合
 
@@ -217,7 +313,7 @@ salon.json
 
 ## 複数CONCEPT / COSMETOLOGYセクションの管理
 
-ページの `index.html` には `CONCEPT01`〜`10` および `COSMETOLOGY01`〜`20` までの枠を用意しています。各セクションの内容は、`data/` ディレクトリ内の対応するJSONファイル（例: `cosmetology01.json`）で管理します。表示したくないセクションは、`index.html` 内で該当する `<section>` をコメントアウトしてください。
+ページの `index.html` には `CONCEPT01`〜`06` および `COSMETOLOGY01`〜`18` までの枠を用意しています。各セクションの内容は、`data/` ディレクトリ内の対応するJSONファイル（例: `cosmetology01.json`）で管理します。表示したくないセクションは、`index.html` 内で該当する `<section>` をコメントアウトしてください。
 
 ### リンク識別子の指定方法
 
@@ -225,8 +321,8 @@ salon.json
 
 | 指定値 | 動作 |
 |---|---|
-| `CONCEPT01`〜`10` | すべて `index.html#concept` へ統一され、ページ内で最初に存在するCONCEPTセクションへジャンプします。 |
-| `COSMETOLOGY01`〜`20` | 指定した番号のセクション（例: `#cosmetology05`）へ直接ジャンプします。 |
+| `CONCEPT01`〜`06` | すべて `index.html#concept` へ統一され、ページ内で最初に存在するCONCEPTセクションへジャンプします。 |
+| `COSMETOLOGY01`〜`18` | 指定した番号のセクション（例: `#cosmetology05`）へ直接ジャンプします。 |
 | `CONTACT` | `#contact` へジャンプします。`CONTACT-hair` のようにサービスIDを付けると、お問い合わせフォームのサービス選択も自動設定されます。 |
 | `MENU` | `#menu` へジャンプします。`MENU-hair` のように `menu.json` のカテゴリーIDを付けると、該当タブを選択状態にします。 |
 | `SERVICES` 等 | 対応するセクション（例: `#services`）へジャンプします。空白を含む識別子（`OUR STORY` 等）はハイフン繋ぎ（`#our-story`）に変換されます。 |

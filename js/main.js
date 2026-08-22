@@ -19,7 +19,7 @@ const wu3 = "Ib3B4tuI6TiaD85me58WqYH4";
 
 const staffSocialDefinitions = [
   { key: 'facebook', label: 'Facebook', icon: '🄵', className: 'staff-facebook-icon', aliases: ['facebook'] },
-  { key: 'x', label: 'X', icon: '𝕏', className: 'staff-x-icon', aliases: ['x'] },
+  { key: 'x', label: '𝕏', icon: '🕊️', className: 'staff-x-icon', aliases: ['x'] },
   { key: 'pinterest', label: 'Pinterest', icon: '📌', className: 'staff-pinterest-icon', aliases: ['pinterest'] },
   { key: 'youtube', label: 'YouTube', icon: '▶️', className: 'staff-youtube-icon', aliases: ['youtube'] },
   { key: 'tiktok', label: 'TikTok', icon: '🎵', className: 'staff-tiktok-icon', aliases: ['tiktok'] },

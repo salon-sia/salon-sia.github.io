@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>データ管理ツール | Sia Total Beauty Salon</title>
+  <style>
+    :root {
+      --bg: #f7f5f1;
+      --panel: #fffdf9;
+      --panel-muted: #f0ece6;
+      --text: #333333;
+      --muted: #746f69;
+      --line: #d9d2ca;
+      --accent: #8faec4;
+      --accent-dark: #52718a;
+      --danger: #b95768;
+      --success: #5f826c;
+      --shadow: 0 18px 55px rgba(76, 67, 58, .11);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { min-height: 100%; background: var(--bg); }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(143, 174, 196, .16), transparent 32rem),
+        linear-gradient(145deg, #fbfaf7 0%, var(--bg) 58%, #eee9e2 100%);
+      font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      line-height: 1.7;
+    }
+
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 28px; }
+    .login-card, .app-shell { width: min(1080px, 100%); }
+    .login-card {
+      max-width: 460px;
+      padding: 42px;
+      background: rgba(255, 253, 249, .92);
+      border: 1px solid rgba(217, 210, 202, .9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: .78rem;
+    }
+    h1, h2, h3 { margin: 0; font-family: Georgia, "Times New Roman", "Noto Serif JP", serif; font-weight: 400; }
+    h1 { font-size: clamp(1.65rem, 4vw, 2.35rem); line-height: 1.3; }
+    h2 { font-size: 1.45rem; }
+    h3 { font-size: 1.05rem; }
+    .login-card p { color: var(--muted); }
+    .field { display: grid; gap: 7px; margin: 24px 0 16px; }
+    .field label { font-weight: 700; font-size: .9rem; }
+    .field input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+    .field input:focus { border-color: var(--accent-dark); box-shadow: 0 0 0 3px rgba(143,174,196,.22); }
+    .primary-btn, .secondary-btn, .danger-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 18px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+    .primary-btn:hover, .secondary-btn:hover, .danger-btn:hover { transform: translateY(-1px); }
+    .primary-btn:active, .secondary-btn:active, .danger-btn:active { transform: scale(.98); }
+    .primary-btn { color: #fff; background: var(--accent-dark); box-shadow: 0 8px 18px rgba(82,113,138,.2); }
+    .secondary-btn { color: var(--accent-dark); background: #fff; border-color: var(--line); }
+    .danger-btn { color: var(--danger); background: #fff; border-color: rgba(185,87,104,.35); }
+    .full { width: 100%; }
+    .error-message { min-height: 1.7em; margin: 8px 0 0; color: var(--danger) !important; font-size: .9rem; }
+    .app-shell { padding: 28px 0 46px; }
+    .app-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+    .app-header p { max-width: 760px; margin: 8px 0 0; color: var(--muted); }
+    .panel {
+      margin-top: 18px;
+      padding: clamp(22px, 4vw, 34px);
+      background: rgba(255, 253, 249, .94);
+      border: 1px solid rgba(217, 210, 202, .92);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .panel-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
+    .panel-header p { margin: 5px 0 0; color: var(--muted); font-size: .92rem; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .drop-zone {
+      display: grid;
+      place-items: center;
+      min-height: 170px;
+      padding: 24px;
+      text-align: center;
+      border: 2px dashed #bfcbd3;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(143,174,196,.12), rgba(255,255,255,.56));
+      transition: border-color .16s ease, background .16s ease, transform .16s ease;
+    }
+    .drop-zone.dragging { border-color: var(--accent-dark); background: rgba(143,174,196,.22); transform: scale(1.01); }
+    .drop-zone strong { display: block; font-size: 1.05rem; }
+    .drop-zone small { display: block; margin-top: 6px; color: var(--muted); }
+    .drop-zone input { display: none; }
+    .drop-zone label { cursor: pointer; }
+    .status {
+      min-height: 26px;
+      margin: 14px 0 0;
+      padding: 10px 13px;
+      border-radius: 10px;
+      background: var(--panel-muted);
+      color: var(--muted);
+      font-size: .9rem;
+      white-space: pre-wrap;
+    }
+    .status.success { color: var(--success); background: rgba(95,130,108,.1); }
+    .status.error { color: var(--danger); background: rgba(185,87,104,.1); }
+    .status:empty { display: none; }
+    .tips { margin: 18px 0 0; padding: 15px 18px; border-left: 3px solid var(--accent); background: rgba(143,174,196,.09); color: var(--muted); font-size: .9rem; }
+    .tips strong { color: var(--text); }
+    .file-summary { margin-top: 15px; color: var(--muted); font-size: .9rem; }
+    .file-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 7px 12px; margin: 12px 0 0; padding: 0; list-style: none; }
+    .file-list li { overflow: hidden; padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; text-overflow: ellipsis; white-space: nowrap; }
+    .footer-note { margin: 25px 0 0; color: var(--muted); text-align: center; font-size: .78rem; }
+    @media (max-width: 680px) {
+      .screen { padding: 15px; }
+      .login-card { padding: 28px 22px; }
+      .app-shell { padding: 15px 0 30px; }
+      .app-header, .panel-header { display: grid; }
+      .app-header .danger-btn { justify-self: start; }
+    }
+  </style>
+</head>
+<body>
+  <main id="app" class="screen" aria-live="polite"></main>
+
+  <!-- Local copies of the browser libraries keep this page usable after deployment without a package manager. -->
+  <script src="./js/vendor/xlsx.full.min.js"></script>
+  <script src="./js/vendor/jszip.min.js"></script>
+  <script>
+    (() => {
+      'use strict';
+
+      const MANAGEMENT_PASSWORD = 'kokinki-admin';
+      const SESSION_KEY = 'salonDataManagementAuthenticated';
+      const MANIFEST_URL = './data-files.json';
+      const app = document.getElementById('app');
+      let manifestFiles = [];
+
+      const escapeText = (value) => String(value ?? '');
+
+      function renderLogin(message = '') {
+        app.className = 'screen';
+        app.innerHTML = `
+          <section class="login-card" aria-labelledby="login-title">
+            <p class="eyebrow">Private Data Workspace</p>
+            <h1 id="login-title">データ管理ツール</h1>
+            <p>管理者用ページです。続行するにはログインを行ってください。</p>
+            <form id="login-form" novalidate>
+              <div class="field">
+                <label for="management-password">パスワード</label>
+                <input id="management-password" name="password" type="password" autocomplete="current-password" autofocus required>
+              </div>
+              <button class="primary-btn full" type="submit">ログイン</button>
+              <p id="login-error" class="error-message" role="alert">${escapeText(message)}</p>
+            </form>
+          </section>
+        `;
+        document.getElementById('login-form').addEventListener('submit', (event) => {
+          event.preventDefault();
+          const password = document.getElementById('management-password').value;
+          if (password === MANAGEMENT_PASSWORD) {
+            sessionStorage.setItem(SESSION_KEY, '1');
+            renderTool();
+          } else {
+            document.getElementById('login-error').textContent = 'パスワードが正しくありません。ログインを行ってください。';
+            document.getElementById('management-password').value = '';
+            document.getElementById('management-password').focus();
+          }
+        });
+      }
+
+      function renderTool() {
+        app.className = 'screen';
+        app.innerHTML = `
+          <section class="app-shell" aria-labelledby="tool-title">
+            <header class="app-header">
+              <div>
+                <p class="eyebrow">Private Data Workspace</p>
+                <h1 id="tool-title">サイトデータ管理ツール</h1>
+                <p>サイトの <code>data/</code> ディレクトリにあるJSONをExcelで一括編集し、編集後のJSONをZIPで書き出せます。</p>
+              </div>
+              <button id="logout-button" class="danger-btn" type="button">ログアウト</button>
+            </header>
+
+            <section class="panel" aria-labelledby="export-title">
+              <div class="panel-header">
+                <div>
+                  <h2 id="export-title">1. JSONをExcelへ書き出す</h2>
+                  <p>JSONファイルごとに1枚のシートを作成します。使用されている階層だけを左から右へ作成し、配列の要素は [0] のように表示されます。</p>
+                </div>
+                <button id="export-button" class="primary-btn" type="button">Excelをダウンロード</button>
+              </div>
+              <div id="export-status" class="status" role="status"></div>
+              <div id="file-summary" class="file-summary">JSON一覧を確認しています。</div>
+              <ul id="file-list" class="file-list" aria-label="管理対象JSON一覧"></ul>
+              <div class="tips"><strong>編集のヒント：</strong>各行の「ノード種別」と「値」を変更してください。階層列は、使用されている階層だけが作成され、階層を深くするほど右側の列に入力します。配列の要素は <code>[0]</code>、<code>[1]</code> のように入力します。</div>
+            </section>
+
+            <section class="panel" aria-labelledby="import-title">
+              <div class="panel-header">
+                <div>
+                  <h2 id="import-title">2. ExcelからJSON ZIPを作成</h2>
+                  <p>上で出力したExcelを編集してから、下の領域へドラッグ＆ドロップしてください。</p>
+                </div>
+              </div>
+              <div id="drop-zone" class="drop-zone">
+                <label for="excel-input">
+                  <strong>Excelファイルをここへドロップ</strong>
+                  <small>またはクリックして .xlsx / .xls を選択</small>
+                  <input id="excel-input" type="file" accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+                </label>
+              </div>
+              <div id="import-status" class="status" role="status"></div>
+              <div class="button-row" style="margin-top: 15px;">
+                <button id="create-zip-button" class="primary-btn" type="button" disabled>JSON ZIPをダウンロード</button>
+              </div>
+              <div class="tips"><strong>出力形式：</strong>ZIP内の <code>data/</code> フォルダに、シート名へ <code>.json</code> を付けたUTF-8 JSONファイルを配置します。既存サイトの <code>data/</code> フォルダへ上書きコピーしてご利用ください。</div>
+            </section>
+
+            <p class="footer-note">このページはサイト本体からリンクされていない管理者向けページです。認証状態はこのブラウザセッションの間だけ保持されます。</p>
+          </section>
+        `;
+
+        document.getElementById('logout-button').addEventListener('click', () => {
+          sessionStorage.removeItem(SESSION_KEY);
+          renderLogin();
+        });
+        document.getElementById('export-button').addEventListener('click', exportAllJsonToExcel);
+        initializeImportControls();
+        loadManifest();
+      }
+
+      async function loadManifest() {
+        const summary = document.getElementById('file-summary');
+        const list = document.getElementById('file-list');
+        try {
+          const response = await fetch(`${MANIFEST_URL}?ts=${Date.now()}`, { cache: 'no-store' });
+          if (!response.ok) throw new Error('data-files.jsonを読み込めませんでした。');
+          const data = await response.json();
+          manifestFiles = Array.isArray(data.files) ? data.files.filter(file => /^[-a-zA-Z0-9_]+\.json$/.test(file)) : [];
+          if (!manifestFiles.length) throw new Error('管理対象のJSONファイルが見つかりません。');
+          summary.textContent = `${manifestFiles.length}個のJSONファイルを管理対象として読み込みます。`;
+          list.innerHTML = manifestFiles.map(file => `<li>${escapeText(file)}</li>`).join('');
+        } catch (error) {
+          manifestFiles = [];
+          summary.textContent = error.message;
+          setStatus('export-status', error.message, 'error');
+        }
+      }
+
+      function setStatus(id, message, type = '') {
+        const element = document.getElementById(id);
+        if (!element) return;
+        element.className = `status${type ? ` ${type}` : ''}`;
+        element.textContent = message;
+      }
+
+      function getServerSystemName() {
+        return window.location.hostname || '取得不可';
+      }
+
+      function padTimePart(value) {
+        return String(value).padStart(2, '0');
+      }
+
+      function formatGenerationTimestamp(date) {
+        return [
+          date.getFullYear(),
+          padTimePart(date.getMonth() + 1),
+          padTimePart(date.getDate())
+        ].join('') + '-' + [
+          padTimePart(date.getHours()),
+          padTimePart(date.getMinutes()),
+          padTimePart(date.getSeconds())
+        ].join('');
+      }
+
+      function makeServerIdentifier(systemData) {
+        const serverSystemName = String(systemData?.serverSystemName || 'server');
+        const firstLabel = serverSystemName.split('.')[0] || 'server';
+        return firstLabel.replace(/[^a-zA-Z0-9_-]/g, '_') || 'server';
+      }
+
+      function makeExcelFileName(systemData, startedAt) {
+        return `${makeServerIdentifier(systemData)}_salon-json-data_${formatGenerationTimestamp(startedAt)}.xlsx`;
+      }
+
+      function getNodeType(value) {
+        if (value === null) return 'null';
+        if (Array.isArray(value)) return 'array';
+        if (typeof value === 'object') return 'object';
+        if (typeof value === 'number') return 'number';
+        if (typeof value === 'boolean') return 'boolean';
+        return 'string';
+      }
+
+      function pathLabel(segment) {
+        return typeof segment === 'number' ? `[${segment}]` : String(segment);
+      }
+
+      function displayPath(path) {
+        if (!path.length) return '__ROOT__';
+        return path.reduce((result, segment, index) => {
+          if (typeof segment === 'number') return `${result}[${segment}]`;
+          return index === 0 ? String(segment) : `${result}.${segment}`;
+        }, '');
+      }
+
+      function flattenJson(value, path = [], rows = []) {
+        const nodeType = getNodeType(value);
+        if (nodeType === 'object') {
+          const keys = Object.keys(value);
+          if (!keys.length) rows.push({ path, nodeType, value: '' });
+          keys.forEach(key => flattenJson(value[key], [...path, key], rows));
+          return rows;
+        }
+        if (nodeType === 'array') {
+          if (!value.length) rows.push({ path, nodeType, value: '' });
+          value.forEach((item, index) => flattenJson(item, [...path, index], rows));
+          return rows;
+        }
+        rows.push({ path, nodeType, value: nodeType === 'null' ? '' : value });
+        return rows;
+      }
+
+      function makeSheetRows(fileName, json) {
+        const flattenedRows = flattenJson(json);
+        const pathColumnCount = flattenedRows.reduce((maxDepth, item) => Math.max(maxDepth, item.path.length), 0);
+        const headers = [
+          ...Array.from({ length: pathColumnCount }, (_, index) => `階層${index + 1}`),
+          'ノード種別',
+          '値',
+          'JSONパス'
+        ];
+        const rows = flattenedRows.map(item => {
+          const pathCells = Array(pathColumnCount).fill('');
+          item.path.forEach((segment, index) => {
+            pathCells[index] = pathLabel(segment);
+          });
+          return [...pathCells, item.nodeType, item.value, displayPath(item.path)];
+        });
+        return [headers, ...rows];
+      }
+
+      function makeSheetName(fileName, usedNames) {
+        const raw = fileName.replace(/\.json$/i, '').replace(/[\\/?*[\]:]/g, '_');
+        const base = (raw || 'data').slice(0, 31);
+        let name = base;
+        let counter = 2;
+        while (usedNames.has(name)) {
+          const suffix = `_${counter++}`;
+          name = `${base.slice(0, 31 - suffix.length)}${suffix}`;
+        }
+        usedNames.add(name);
+        return name;
+      }
+
+      async function fetchJsonFile(fileName) {
+        const response = await fetch(`../data/${encodeURIComponent(fileName)}?ts=${Date.now()}`, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`${fileName}を読み込めませんでした。`);
+        return response.json();
+      }
+
+      async function exportAllJsonToExcel() {
+        if (!manifestFiles.length) {
+          setStatus('export-status', 'JSON一覧が読み込まれていません。ページを再読み込みしてください。', 'error');
+          return;
+        }
+        const button = document.getElementById('export-button');
+        const generationStartedAt = new Date();
+        const systemData = { serverSystemName: getServerSystemName() };
+        const outputFileName = makeExcelFileName(systemData, generationStartedAt);
+        button.disabled = true;
+        setStatus('export-status', `${manifestFiles.length}個のJSONを読み込んでExcelを作成しています。`);
+        try {
+          const entries = await Promise.all(manifestFiles.map(async fileName => ({ fileName, json: await fetchJsonFile(fileName) })));
+          const workbook = XLSX.utils.book_new();
+          const usedNames = new Set();
+          entries.forEach(({ fileName, json }) => {
+            const sheetRows = makeSheetRows(fileName, json);
+            const sheet = XLSX.utils.aoa_to_sheet(sheetRows);
+            const pathColumnCount = sheetRows[0].filter(header => /^階層\d+$/.test(header)).length;
+            sheet['!cols'] = [
+              ...Array.from({ length: pathColumnCount }, () => ({ wch: 16 })),
+              { wch: 13 }, { wch: 34 }, { wch: 38 }
+            ];
+            XLSX.utils.book_append_sheet(workbook, sheet, makeSheetName(fileName, usedNames));
+          });
+          const output = XLSX.write(workbook, { bookType: 'xlsx', type: 'array', compression: true });
+          downloadBlob(new Blob([output], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), outputFileName);
+          setStatus('export-status', `${entries.length}個のJSONをExcelへ書き出しました。`, 'success');
+        } catch (error) {
+          setStatus('export-status', `Excelの作成に失敗しました。\n${error.message}`, 'error');
+        } finally {
+          button.disabled = false;
+        }
+      }
+
+      function initializeImportControls() {
+        const input = document.getElementById('excel-input');
+        const dropZone = document.getElementById('drop-zone');
+        const zipButton = document.getElementById('create-zip-button');
+        let selectedFile = null;
+
+        const acceptFile = (file) => {
+          if (!file) return;
+          if (!/\.(xlsx|xls)$/i.test(file.name)) {
+            selectedFile = null;
+            zipButton.disabled = true;
+            setStatus('import-status', 'Excelファイル（.xlsx または .xls）を選択してください。', 'error');
+            return;
+          }
+          selectedFile = file;
+          zipButton.disabled = false;
+          setStatus('import-status', `${file.name}を選択しました。内容を確認して「JSON ZIPをダウンロード」を押してください。`, 'success');
+        };
+
+        input.addEventListener('change', () => acceptFile(input.files[0]));
+        ['dragenter', 'dragover'].forEach(type => dropZone.addEventListener(type, event => {
+          event.preventDefault();
+          dropZone.classList.add('dragging');
+        }));
+        ['dragleave', 'drop'].forEach(type => dropZone.addEventListener(type, event => {
+          event.preventDefault();
+          dropZone.classList.remove('dragging');
+        }));
+        dropZone.addEventListener('drop', event => acceptFile(event.dataTransfer.files[0]));
+        zipButton.addEventListener('click', () => createJsonZip(selectedFile, zipButton));
+      }
+
+      function getPathColumns(headers) {
+        return headers
+          .map((header, index) => ({ header: String(header || ''), index }))
+          .filter(item => /^階層\d+$/.test(item.header))
+          .sort((a, b) => Number(a.header.slice(2)) - Number(b.header.slice(2)));
+      }
+
+      function isArraySegment(segment) {
+        return /^\[\d+\]$/.test(String(segment));
+      }
+
+      function normalizeSegment(segment) {
+        const value = String(segment ?? '');
+        return isArraySegment(value) ? Number(value.slice(1, -1)) : value;
+      }
+
+      function parseTypedValue(type, rawValue) {
+        switch (String(type || '').toLowerCase()) {
+          case 'null': return null;
+          case 'object': return {};
+          case 'array': return [];
+          case 'string': return rawValue === null || rawValue === undefined ? '' : String(rawValue);
+          case 'number': {
+            const number = typeof rawValue === 'number' ? rawValue : Number(String(rawValue).trim());
+            if (!Number.isFinite(number)) throw new Error(`数値に変換できない値「${rawValue}」があります。`);
+            return number;
+          }
+          case 'boolean': {
+            if (rawValue === true || rawValue === false) return rawValue;
+            const normalized = String(rawValue).trim().toLowerCase();
+            if (['true', '1', 'yes', 'はい'].includes(normalized)) return true;
+            if (['false', '0', 'no', 'いいえ'].includes(normalized)) return false;
+            throw new Error(`真偽値は true / false で入力してください（「${rawValue}」）。`);
+          }
+          default: throw new Error(`対応していないノード種別「${type}」があります。`);
+        }
+      }
+
+      function assignPath(holder, segments, nodeType, rawValue) {
+        const value = parseTypedValue(nodeType, rawValue);
+        if (!segments.length) {
+          holder.value = value;
+          return;
+        }
+        if (holder.value === undefined || holder.value === null || typeof holder.value !== 'object') {
+          holder.value = isArraySegment(segments[0]) ? [] : {};
+        }
+        let current = holder.value;
+        segments.forEach((segment, index) => {
+          const normalized = normalizeSegment(segment);
+          const last = index === segments.length - 1;
+          if (last) {
+            current[normalized] = value;
+            return;
+          }
+          const nextShouldBeArray = isArraySegment(segments[index + 1]);
+          if (current[normalized] === undefined || current[normalized] === null || typeof current[normalized] !== 'object') {
+            current[normalized] = nextShouldBeArray ? [] : {};
+          }
+          current = current[normalized];
+        });
+      }
+
+      function parseSheet(sheet, sheetName) {
+        const matrix = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '', raw: true });
+        if (!matrix.length) throw new Error(`${sheetName}シートが空です。`);
+        const headers = matrix[0].map(header => String(header || '').trim());
+        const pathColumns = getPathColumns(headers);
+        const typeIndex = headers.indexOf('ノード種別');
+        const valueIndex = headers.indexOf('値');
+        if (typeIndex < 0 || valueIndex < 0) {
+          throw new Error(`${sheetName}シートの見出しが管理ツールの形式ではありません。`);
+        }
+        const holder = { value: undefined };
+        let rowCount = 0;
+        matrix.slice(1).forEach((row, rowIndex) => {
+          const type = row[typeIndex];
+          const pathValues = pathColumns.map(column => row[column.index]).filter(value => value !== '' && value !== null && value !== undefined);
+          if (!type && !pathValues.length) return;
+          if (!type) throw new Error(`${sheetName}シート${rowIndex + 2}行目のノード種別が空欄です。`);
+          const segments = pathValues.length && pathValues[0] === '__ROOT__' ? [] : pathValues;
+          assignPath(holder, segments, type, row[valueIndex]);
+          rowCount += 1;
+        });
+        if (holder.value === undefined) throw new Error(`${sheetName}シートにJSONデータ行がありません。`);
+        return { json: holder.value, rowCount };
+      }
+
+      async function createJsonZip(file, button) {
+        if (!file) return;
+        button.disabled = true;
+        setStatus('import-status', 'Excelを解析してJSONを作成しています。');
+        try {
+          const buffer = await file.arrayBuffer();
+          const workbook = XLSX.read(buffer, { type: 'array', cellDates: false });
+          if (!workbook.SheetNames.length) throw new Error('Excelにシートがありません。');
+          const zip = new JSZip();
+          const errors = [];
+          let successCount = 0;
+          workbook.SheetNames.forEach(sheetName => {
+            try {
+              const parsed = parseSheet(workbook.Sheets[sheetName], sheetName);
+              const fileName = `${sheetName}.json`;
+              zip.file(`data/${fileName}`, `${JSON.stringify(parsed.json, null, 2)}\n`);
+              successCount += 1;
+            } catch (error) {
+              errors.push(`${sheetName}: ${error.message}`);
+            }
+          });
+          if (errors.length) throw new Error(`JSON化できないシートがあります。\n${errors.join('\n')}`);
+          const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } });
+          const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+          downloadBlob(blob, `salon-json-data-${date}.zip`);
+          setStatus('import-status', `${successCount}個のJSONをUTF-8形式でZIPにまとめました。`, 'success');
+        } catch (error) {
+          setStatus('import-status', `JSON ZIPの作成に失敗しました。\n${error.message}`, 'error');
+        } finally {
+          button.disabled = false;
+        }
+      }
+
+      function downloadBlob(blob, fileName) {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+
+      if (sessionStorage.getItem(SESSION_KEY) === '1') renderTool();
+      else renderLogin();
+    })();
+  </script>
+</body>
+</html>
