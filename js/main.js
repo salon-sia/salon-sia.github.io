@@ -596,6 +596,10 @@ async function renderMenuSection() {
     data.categories?.forEach((cat, catIndex) => {
       let rowsHtml = '';
       cat.items?.forEach(item => {
+        const durationCell = item.duration !== null && item.duration !== undefined && item.duration !== ''
+          ? `<td class="menu-item-duration">約${escapeHtml(item.duration)}分</td>`
+          : '';
+
         rowsHtml += `
           <tr>
             <td>
@@ -606,7 +610,7 @@ async function renderMenuSection() {
               <div class="menu-item-desc">${escapeHtml(item.description)}</div>
             </td>
             <td class="menu-item-price">¥${item.price.toLocaleString()}</td>
-            <td class="menu-item-duration">約${item.duration}分</td>
+            ${durationCell}
           </tr>
         `;
       });
