@@ -1,7 +1,7 @@
 {
   "salon": {
     "name": "Sia Total Beauty Salon",
-    "tagline": "茅野エリア人気上位サロン☆口コミ4.9以上☆完全マンツーマン"
+    "tagline": "髪質改善・カラー・トリートメント・縮毛矯正・白髪ぼかし・スパ＆頭身浴＜茅野・諏訪＞"
   },
   "categories": [
     {
@@ -10,73 +10,406 @@
       "icon": "🎫",
       "items": [
         {
-          "id": "c1",
-          "name": "【人気No.1】カット＋美髪カラー＋質感改善トリートメント",
-          "description": "Sia Total Beauty Salonの人気No.1クーポン。髪質改善に特化した美髪カラーでダメージを軽減し、最高の手触りを体験してください。",
-          "price": 13400,
-          "duration": 120,
-          "popular": true
+          "id": "cp_open",
+          "name": "【新規限定】Open記念 全メニュー10%off",
+          "description": "Sia茅野店のNew Open記念。全メニューを10%オフで利用できる新規向けクーポンです。",
+          "price": 0,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": true,
+          "eligibility": "新規",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011458991&add=0&addMenu=0&rootCd=10",
+          "priceLabel": "10%OFF"
         },
         {
-          "id": "c2",
-          "name": "【梅雨限定】縮毛矯正＋髪質改善トリートメント",
-          "description": "縮毛矯正と髪質改善トリートメントのメニューになります。梅雨を乗り切って快適に過ごしましょう♪",
-          "price": 19800,
-          "duration": 180,
-          "popular": true
+          "id": "cp_straight_first",
+          "name": "【初めての縮毛矯正はこちら】Sia髪質改善美髪ストレート＋髪質改善TR",
+          "description": "初めて髪質改善ストレートを受ける方におすすめ。髪質を見極め、ダメージに配慮したツヤのある仕上がりへ。カット別。",
+          "price": 23400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": true,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011458931&add=0&addMenu=0&rootCd=10"
         },
         {
-          "id": "c3",
-          "name": "【新規限定】メンズカット＋パーマ",
-          "description": "波巻き・ツイスパ・サーフカールなど流行り全対応◎朝のセットも簡単にキマるスタイルへ。",
+          "id": "cp_color_best",
+          "name": "【カラーをするならこちら】カット＋極艶美髪カラー＋髪質改善トリートメント",
+          "description": "極艶美髪カラーと髪質改善トリートメントで、上品な色とツヤ、毛先までまとまりやすい髪へ。イルミナは＋1,000円。頭身浴＆炭酸スパ10分は＋6,600円。",
+          "price": 14900,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": true,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011457248&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_after_straight",
+          "name": "【矯正後のメンテ】カット＋美髪ケアカラー＋Sia髪質改善トリートメント",
+          "description": "フルカラー、シャンプー、ブロー込み。縮毛矯正後の髪をカラー前後のケアまで丁寧に整えます。",
+          "price": 15900,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": true,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011307354&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_retouch_repair",
+          "name": "カット＋リタッチカラー＋毛髪補修トリートメント",
+          "description": "根元2cmまで。髪質とクセに合わせたカット、ダメージに配慮したカラー、毛髪補修トリートメントのセットです。白髪染めにも対応。",
+          "price": 12950,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011270778&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_retouch_quality",
+          "name": "カット＋リタッチカラー＋Sia髪質改善トリートメント",
+          "description": "根元2cmまで。カラーの負担に配慮し、髪質改善トリートメントでさらさらの質感へ。白髪染めにも対応。",
+          "price": 13900,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011270779&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_monthly_color",
+          "name": "【月一メンテナンスカラー】リタッチカラー＋質感向上トリートメント",
+          "description": "根元2cmまでのリタッチ。毛先への薬剤塗布を避け、髪色をメンテナンスします。ブロー代込み、前髪カット付き。",
+          "price": 9900,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "再来",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011270782&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_mens_reward",
+          "name": "【メンズご褒美コース】カット＋頭身浴スパ＋眉カット",
+          "description": "似合わせカット、頭身浴5分、ヘッドスパ10分、眉カットのセット。ゆっくりリラックスできるメンズコースです。",
+          "price": 9350,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011286517&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_cut",
+          "name": "似合わせカット",
+          "description": "お悩みやなりたいイメージを丁寧にカウンセリング。シャンプーは＋550円で追加できます。",
+          "price": 4950,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011286519&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_cut_shampoo",
+          "name": "似合わせカット＋シャンプー",
+          "description": "お悩みやなりたいイメージに合わせた似合わせカット。",
+          "price": 5500,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011457350&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_headspa",
+          "name": "【日々の疲れを癒す時間】頭身浴＋ヘッドスパ＋トリートメント",
+          "description": "頭身浴、ヘッドスパ、トリートメント、シャンプー、ブロー込み。頭皮を整えながらリフレッシュできます。",
+          "price": 6600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": true,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011286547&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_perm_tr",
+          "name": "似合わせカット＋コスメ艶パーマ＋髪質改善トリートメント",
+          "description": "柔らかな動きと髪質改善トリートメントで、まとまりとツヤのあるスタイルへ。デジタルパーマは＋2,200円。",
+          "price": 19100,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011458641&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_straight_tr",
+          "name": "【縮毛矯正】似合わせカット＋潤艶縮毛矯正＋髪質改善トリートメント",
+          "description": "クセや広がりを自然に整え、髪質改善で芯から潤う艶髪へ。頭身浴は＋4,400円。",
+          "price": 24600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": true,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011458691&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_straight_best",
+          "name": "【イチオシ】似合わせカット＋Sia髪質改善美髪ストレート＋髪質改善Tr",
+          "description": "髪質改善成分でつくる縮毛矯正。ダメージに配慮し、しなやかな艶と自然なストレートへ。頭身浴は＋4,400円。",
+          "price": 27900,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": true,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011458706&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_mens_color",
+          "name": "【メンズカラー】カット＋カラー＋眉カット",
+          "description": "カット、カラー、眉カットのセット。オシャレ染めから白髪染めまで対応。イルミナは＋1,000円。",
+          "price": 12400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011286525&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_mens_nuance",
+          "name": "【メンズニュアンスパーマ】カット＋ニュアンスパーマ＋眉カット",
+          "description": "カット、ニュアンスパーマ、眉カットのセット。",
           "price": 11400,
-          "duration": 120,
-          "popular": false
-        }
-      ]
-    },
-    {
-      "id": "hair",
-      "name": "Hair",
-      "icon": "💇",
-      "items": [
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "男性限定",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011458937&add=0&addMenu=0&rootCd=10"
+        },
         {
-          "id": "hair_special",
-          "name": "Hair",
-          "description": "特別Hairメニュー",
-          "price": 5500,
-          "duration": 30,
-          "popular": true
-        }
-      ]
-    },
-    {
-      "id": "eyelash",
-      "name": "Eyelash",
-      "icon": "👁️",
-      "items": [
+          "id": "cp_mens_design",
+          "name": "【メンズデザインパーマ】カット＋デザインパーマ＋眉カット",
+          "description": "カット、デザインパーマ、眉カットのセット。",
+          "price": 13400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011458961&add=0&addMenu=0&rootCd=10"
+        },
         {
-          "id": "eyelash_special",
-          "name": "Eyelash",
-          "description": "特別Eyelashメニュー",
-          "price": 5500,
-          "duration": 30,
-          "popular": true
-        }
-      ]
-    },
-    {
-      "id": "nail",
-      "name": "Nail",
-      "icon": "💅",
-      "items": [
+          "id": "cp_mens_trend",
+          "name": "【メンズトレンドパーマ】カット＋トレンドパーマ＋眉カット",
+          "description": "波巻き、波巻きツイスト、サーフカール、クリームパーマなどに対応。",
+          "price": 14400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011458966&add=0&addMenu=0&rootCd=10"
+        },
         {
-          "id": "nail_special",
-          "name": "Nail",
-          "description": "特別Nailメニュー",
-          "price": 5500,
-          "duration": 30,
-          "popular": true
+          "id": "cp_mens_special",
+          "name": "【メンズ特殊パーマ】カット＋特殊パーマ＋眉カット",
+          "description": "ツイスト、ツイストスパイラルなどの特殊パーマ。",
+          "price": 15400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011458967&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_mens_straight",
+          "name": "【メンズナチュラル縮毛矯正】カット＋縮毛矯正＋質感向上TR",
+          "description": "カット、自然な縮毛矯正、質感向上トリートメントのセット。男性の縮毛矯正におすすめです。",
+          "price": 15400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "男性限定",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011458969&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_double_color",
+          "name": "【ブリーチカラー】ダブルカラー＋髪質改善トリートメント",
+          "description": "ブリーチ、オンカラー、髪質改善トリートメント。ロング料金込み。デザインにより追加料金の場合があります。",
+          "price": 20000,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011270745&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_bleach_retouch",
+          "name": "【ブリーチカラー】リタッチ＋オンカラー＋髪質改善トリートメント",
+          "description": "ブリーチリタッチ、オンカラー、髪質改善トリートメント。ロング料金込み。",
+          "price": 17400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011270749&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_straight_repair",
+          "name": "【縮毛矯正】似合わせカット＋潤艶縮毛矯正＋毛髪補修TR",
+          "description": "クセや広がりを自然に抑え、縮毛矯正と毛髪補修トリートメントでツヤと指通りを高めます。",
+          "price": 22400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011459047&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_bang_straight",
+          "name": "【前髪のメンテ】似合わせカット＋前髪縮毛矯正＋髪質改善TR",
+          "description": "前髪のクセを自然に整え、髪質改善トリートメントでツヤとうるおいをプラス。",
+          "price": 14150,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011459049&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_illumina",
+          "name": "【カラーメニュー】似合わせカット＋イルミナカラー＋髪質補修TR",
+          "description": "透明感、ツヤ、柔らかな質感を叶えるイルミナカラー。フルカラー料金込み。",
+          "price": 15800,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011459157&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_perm_menu",
+          "name": "【パーマメニュー】似合わせカット＋コスメ艶パーマ＋髪質補修TR",
+          "description": "ダメージを抑えたコスメパーマで柔らかく自然な質感へ。デジタルパーマは＋2,200円。",
+          "price": 16350,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011459247&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_gray_blend",
+          "name": "【白髪ぼかし】似合わせカット＋ハイライト＋フルカラー＋髪質改善TR",
+          "description": "ハイライトと髪質改善トリートメントで立体感とツヤを両立。ハイライトのデザインにより料金が変動します。",
+          "price": 16900,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011460779&add=0&addMenu=0&rootCd=10",
+          "priceLabel": "¥16,900〜"
+        },
+        {
+          "id": "cp_color_menu",
+          "name": "【カラーメニュー】似合わせカット＋美髪ケアカラー＋髪質補修TR",
+          "description": "リタッチ料金。＋1,100円でフルカラーに変更可。白髪染め対応。頭身浴は＋4,400円。",
+          "price": 12500,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011460896&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_design_color",
+          "name": "【デザインカラー】カット＋デザインカラー＋髪質改善トリートメント",
+          "description": "ブリーチを使ったデザインカラー。髪質改善でダメージに配慮し、トレンド感のあるカラーへ。",
+          "price": 19100,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011461026&add=0&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cp_acid_heat",
+          "name": "カット＋酸熱融合トリートメント",
+          "description": "シャンプー、ブロー込み。髪の状態に合わせて薬剤を補給し、うねりや広がりを抑えます。",
+          "price": 11000,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "eligibility": "全員",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&couponId=CP00000011316195&add=0&addMenu=0&rootCd=10",
+          "priceLabel": "¥11,000〜"
+        },
+        {
+          "id": "ncp_flash_gradient",
+          "name": "オープン記念♪【人気No.1♪】マグネットフラッシュグラデーション",
+          "description": "繊細なマグネットの輝きとフラッシュのキラキラ感を楽しめる華やかで透明感のあるグラデーション。",
+          "price": 6600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": true,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&couponId=CP00000013296895&add=0",
+          "eligibility": "新規"
+        },
+        {
+          "id": "ncp_cheek_magnet",
+          "name": "オープン記念♪【韓国ネイル】チークマグネット",
+          "description": "爪の中央にふんわり色づくチークデザインとマグネットの奥行きある輝き。マグネット部分はラメに変更可。",
+          "price": 7150,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&couponId=CP00000013296900&add=0",
+          "eligibility": "新規"
+        },
+        {
+          "id": "ncp_magnet_one",
+          "name": "オープン記念♪【SNSで話題♪】マグネットワンカラー",
+          "description": "角度で変わる輝きと奥行き感。色の追加は一色につき＋100円。",
+          "price": 6050,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&couponId=CP00000013296904&add=0",
+          "eligibility": "新規"
+        },
+        {
+          "id": "ncp_baby_boomer",
+          "name": "オープン記念♪【韓国トレンド♪】ベイビーブーマー",
+          "description": "ピンクベースにホワイトグラデーション。血色感と透明感のある上品なデザイン。",
+          "price": 7150,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&couponId=CP00000013296908&add=0",
+          "eligibility": "新規"
+        },
+        {
+          "id": "ncp_office",
+          "name": "オープン記念♪【オフィスネイル】ワンカラー＋ラメライン",
+          "description": "ワンカラーに繊細なラメラインを添えた、オフィスにも日常にもなじむデザイン。",
+          "price": 4950,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&couponId=CP00000013296918&add=0",
+          "eligibility": "新規"
+        },
+        {
+          "id": "ncp_lame_gradient",
+          "name": "オープン記念♪ラメグラデーション",
+          "description": "爪先から広がるラメの輝き。指先に上品な華やかさをプラスします。",
+          "price": 4400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&couponId=CP00000013296936&add=0",
+          "eligibility": "新規"
+        },
+        {
+          "id": "ncp_nuance",
+          "name": "【選べる！】定額ニュアンスネイル",
+          "description": "定額デザインの中から選べる、色の重なりと抜け感が魅力のニュアンスネイル。",
+          "price": 7700,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&couponId=CP00000013296942&add=0",
+          "eligibility": "全員"
+        },
+        {
+          "id": "ncp_handmassage",
+          "name": "【贅沢ハンドマッサージ付き★】ラメグラデーション",
+          "description": "ラメグラデーションに保湿オイルのハンドマッサージをプラス。片手10分。",
+          "price": 6600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&couponId=CP00000013296948&add=0",
+          "eligibility": "全員"
+        },
+        {
+          "id": "ncp_bringin_art",
+          "name": "【持ち込みアート】90分",
+          "description": "90分以内で施術可能な持ち込みデザイン。複雑なアートやパーツは対象外の場合があります。パーツ別料金。",
+          "price": 9350,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&couponId=CP00000013296977&add=0",
+          "eligibility": "全員"
         }
       ]
     },
@@ -86,20 +419,227 @@
       "icon": "✂️",
       "items": [
         {
-          "id": "cut_basic",
-          "name": "デザインカット",
-          "description": "シャンプー・ブロー込。お客様の骨格や髪質に合わせた再現性の高いカットをご提供します。",
-          "price": 5500,
-          "duration": 60,
-          "popular": false
+          "id": "set_straight_cut",
+          "name": "髪質改善縮毛矯正＋カット※ロング料金なし",
+          "description": "お髪に優しい薬剤を使用。クセを抑えたさらさらの髪へ。カラー毛やダメージ毛にも配慮します。",
+          "price": 28400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": true,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763907&addMenu=0&rootCd=10"
         },
         {
-          "id": "cut_student",
-          "name": "【学割U24】カット",
-          "description": "学生限定のお得なカットプランです。",
-          "price": 3900,
-          "duration": 60,
-          "popular": false
+          "id": "set_retouch_cut",
+          "name": "カット＋根元リタッチカラー※ロング料金なし",
+          "description": "根元のカラーとカット。髪の状態に合わせたケアを提案します。",
+          "price": 11950,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763906&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "set_fullcolor_cut",
+          "name": "カット＋全体フルカラー※ロング料金なし",
+          "description": "カットと全体フルカラーのセット。",
+          "price": 13050,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763908&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "set_digital_cut",
+          "name": "カット＋デジタルパーマ※ロング料金なし",
+          "description": "カットとデジタルパーマのセット。",
+          "price": 15600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763909&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "set_shampoo_cut",
+          "name": "カット＋シャンプー",
+          "description": "カットとシャンプーのセット。",
+          "price": 5500,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763910&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "set_headspa_cut",
+          "name": "カット＋頭身浴スパ",
+          "description": "カットと頭身浴スパのセット。",
+          "price": 9350,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763911&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "set_straight_cut2",
+          "name": "潤艶縮毛矯正＋カット※ロング料金なし",
+          "description": "自然な質感の縮毛矯正とカット。",
+          "price": 24400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": true,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763912&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "set_mens_color",
+          "name": "メンズカット＋カラー",
+          "description": "メンズ向けカットとカラー。",
+          "price": 11950,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763913&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "set_mens_nuance",
+          "name": "メンズカット＋ニュアンスパーマ",
+          "description": "メンズ向けカットとニュアンスパーマ。",
+          "price": 11400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763914&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "set_mens_design",
+          "name": "メンズカット＋デザインパーマ",
+          "description": "メンズ向けカットとデザインパーマ。",
+          "price": 13400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763915&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "set_mens_trend",
+          "name": "メンズカット＋トレンドパーマ",
+          "description": "メンズ向けカットとトレンドパーマ。",
+          "price": 14400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763916&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "set_mens_special",
+          "name": "メンズカット＋特殊パーマ",
+          "description": "メンズ向けカットと特殊パーマ。",
+          "price": 15400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002763917&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "set_perm_cut",
+          "name": "カット＋パーマ※ロング料金なし",
+          "description": "お髪に優しいハーブ薬剤を使用。デザイン豊かなスタイルへ。",
+          "price": 13400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&setmenuId=SN00000002704697&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cut_front",
+          "name": "前髪カット",
+          "description": "要問い合わせ。ネット予約対象外。",
+          "price": 0,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "priceLabel": "要問い合わせ"
+        },
+        {
+          "id": "cut_basic",
+          "name": "カット",
+          "description": "カット、ブロー、シャンプー込み。丁寧にカウンセリングします。",
+          "price": 4950,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": true,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000006883524&addMenu=0&rootCd=10",
+          "priceLabel": "¥4,950〜"
+        },
+        {
+          "id": "cut_school",
+          "name": "スクールカット",
+          "description": "中学生・高校生のカット、ブロー、シャンプー込み。",
+          "price": 4500,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000006883525&addMenu=0&rootCd=10",
+          "priceLabel": "¥4,500〜"
+        },
+        {
+          "id": "cut_child",
+          "name": "チャイルドカット",
+          "description": "小学生以下のカット。シャンプーなし。",
+          "price": 4000,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000006883526&addMenu=0&rootCd=10",
+          "priceLabel": "¥4,000〜"
+        },
+        {
+          "id": "cut_shampoo",
+          "name": "カットシャンプー",
+          "description": "カットとシャンプー。",
+          "price": 5500,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004645&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cut_headspa",
+          "name": "カット頭身浴スパ",
+          "description": "カットと頭身浴スパ。",
+          "price": 9350,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004647&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cut_mens_quick_brow",
+          "name": "メンズカットクイックスパまゆカット",
+          "description": "メンズカット、クイックスパ、眉カット。",
+          "price": 7700,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004648&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cut_mens_brow",
+          "name": "メンズカット眉カット",
+          "description": "メンズカットと眉カット。",
+          "price": 6600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004649&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "cut_mens_quick",
+          "name": "メンズカットクイックスパ",
+          "description": "メンズカットとクイックスパ。",
+          "price": 6600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004650&addMenu=0&rootCd=10"
         }
       ]
     },
@@ -109,43 +649,59 @@
       "icon": "🎨",
       "items": [
         {
+          "id": "color_retouch",
+          "name": "リタッチカラー",
+          "description": "根元2cmまで。カット別、ブロー料金込み。",
+          "price": 7000,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000006883527&addMenu=0&rootCd=10",
+          "priceLabel": "¥7,000〜"
+        },
+        {
           "id": "color_full",
-          "name": "美髪フルカラー",
-          "description": "ダメージを最小限に抑え、艶のある美しい髪色に仕上げます。",
-          "price": 7700,
-          "duration": 90,
-          "popular": true
+          "name": "全体カラー",
+          "description": "全体カラー。カット別、ブロー料金込み。",
+          "price": 8100,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000006883528&addMenu=0&rootCd=10",
+          "priceLabel": "¥8,100〜"
         },
         {
-          "id": "color_care",
-          "name": "プレミアムケアカラー",
-          "description": "より高いケア成分を配合したカラー剤で、透明感と艶を両立します。",
+          "id": "color_maintenance",
+          "name": "メンテナンスカラー",
+          "description": "21日以内の根元染め。カット別、ブロー込み。",
+          "price": 6600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000006883529&addMenu=0&rootCd=10",
+          "priceLabel": "¥6,600〜"
+        },
+        {
+          "id": "color_bleach",
+          "name": "ブリーチカラー",
+          "description": "15レベル以上のハイトーン。カット別、ロング料金別、ブロー料金込み。",
           "price": 9900,
-          "duration": 90,
-          "popular": false
-        }
-      ]
-    },
-    {
-      "id": "perm",
-      "name": "パーマ・縮毛矯正",
-      "icon": "🌀",
-      "items": [
-        {
-          "id": "perm_basic",
-          "name": "デザインパーマ",
-          "description": "お客様のなりたいイメージに合わせて、最適なパーマをご提案します。",
-          "price": 11000,
-          "duration": 120,
-          "popular": false
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000006883530&addMenu=0&rootCd=10",
+          "priceLabel": "¥9,900〜"
         },
         {
-          "id": "straight",
-          "name": "美髪縮毛矯正",
-          "description": "髪の広がりを抑え、柔らかくしなやかなストレートヘアを実現します。",
-          "price": 16500,
-          "duration": 180,
-          "popular": true
+          "id": "color_double",
+          "name": "ダブルカラー",
+          "description": "ブリーチ後にカラー。カット別、ロング料金別、ブロー料金込み。",
+          "price": 15500,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000006883531&addMenu=0&rootCd=10",
+          "priceLabel": "¥15,500〜"
         }
       ]
     },
@@ -155,20 +711,341 @@
       "icon": "✨",
       "items": [
         {
-          "id": "tr_quality",
-          "name": "質感改善トリートメント",
-          "description": "髪の内部から補修し、驚くほどの手触りと艶を実現します。",
-          "price": 6600,
-          "duration": 45,
-          "popular": true
-        },
-        {
           "id": "tr_acid",
           "name": "アルカリ酸熱トリートメント",
-          "description": "本格的な髪質改善を求める方に。うねりや広がりを芯から補修します。",
-          "price": 11400,
-          "duration": 60,
-          "popular": false
+          "description": "システムトリートメントで内部から補修。ブロー料金込み。ネット予約対象外。",
+          "price": 11000,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty"
+        },
+        {
+          "id": "tr_quality",
+          "name": "髪質改善トリートメント",
+          "description": "3ステップトリートメントで内部から補修。ブロー料金込み。",
+          "price": 8800,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004680&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "tr_texture",
+          "name": "質感向上トリートメント",
+          "description": "スタンダードトリートメント。ブロー料金込み。",
+          "price": 6600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004681&addMenu=0&rootCd=10"
+        }
+      ]
+    },
+    {
+      "id": "hair",
+      "name": "Hair",
+      "icon": "💇",
+      "items": [
+        {
+          "id": "hair_notice",
+          "name": "HairメニューはHot Pepper掲載なし",
+          "description": "現在、Hot Pepper BeautyにはHair単独カテゴリの掲載がありません。最新のヘアメニューはカット・カラー・パーマ・縮毛矯正・トリートメント・ヘッドスパをご覧ください。",
+          "price": "0",
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "priceLabel": "掲載なし"
+        }
+      ]
+    },
+    {
+      "id": "eyelash",
+      "name": "Eyelash",
+      "icon": "👁️",
+      "items": [
+        {
+          "id": "eyelash_notice",
+          "name": "EyelashメニューはHot Pepper掲載なし",
+          "description": "指定されたアイラッシュ・ネイル掲載ページには、現在ネイルのクーポン・メニューのみ掲載されています。",
+          "price": "0",
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "priceLabel": "掲載なし"
+        }
+      ]
+    },
+    {
+      "id": "nail",
+      "name": "Nail（ネイル）",
+      "icon": "💅",
+      "items": [
+        {
+          "id": "nail_off_new",
+          "name": "【ご新規様】付替えオフ無料",
+          "description": "付替オフメニュー。ネイルメニューとセットで予約してください。",
+          "price": 0,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "priceLabel": "¥0"
+        },
+        {
+          "id": "nail_off_own",
+          "name": "【リピーター様】自店付替えオフ無料",
+          "description": "付替オフメニュー。ネイルメニューとセットで予約してください。",
+          "price": 0,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "priceLabel": "¥0"
+        },
+        {
+          "id": "nail_off_other",
+          "name": "【リピーター様】他店付替えオフ",
+          "description": "付替オフメニュー。ネイルメニューとセットで予約してください。",
+          "price": 1100,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）"
+        },
+        {
+          "id": "nail_magnet_flash",
+          "name": "マグネットフラッシュグラデーション",
+          "description": "マグネットネイルの上からフラッシュネイルをグラデーション。",
+          "price": 8250,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000013920325&add=5"
+        },
+        {
+          "id": "nail_magnet_one",
+          "name": "マグネットワンカラー",
+          "description": "マグネットネイルのワンカラー。色追加は一色につき＋100円。",
+          "price": 7700,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000013920327&add=5"
+        },
+        {
+          "id": "nail_baby_boomer",
+          "name": "ベイビーブーマー",
+          "description": "ベージュピンクのベースにホワイトグラデーション。",
+          "price": 8800,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000013920328&add=5"
+        },
+        {
+          "id": "nail_one_lame_line",
+          "name": "ワンカラー＋ラメライン",
+          "description": "ワンカラーの先端にキラキラのラメライン。",
+          "price": 6600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000013920329&add=5"
+        },
+        {
+          "id": "nail_cheek_magnet",
+          "name": "チークマグネット",
+          "description": "チークのような色味に、先端のマグネットグラデーション。",
+          "price": 8800,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000013920332&add=5"
+        },
+        {
+          "id": "nail_one_color",
+          "name": "ワンカラー",
+          "description": "定番のワンカラー。一色追加につき＋100円。",
+          "price": 6050,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000014047322&add=5"
+        },
+        {
+          "id": "nail_gradient",
+          "name": "グラデーション",
+          "description": "クリアベースのお好きな色のグラデーション。",
+          "price": 6600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000014047337&add=5"
+        },
+        {
+          "id": "nail_lame_gradient",
+          "name": "ラメグラデーション",
+          "description": "クリアベースの透明感あるラメグラデーション。",
+          "price": 6050,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000014047345&add=5"
+        },
+        {
+          "id": "nail_french",
+          "name": "フレンチ",
+          "description": "クリアベースのフレンチ。カラーベースは90分アートを選択。",
+          "price": 7700,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000014062486&add=5"
+        },
+        {
+          "id": "nail_lame_french",
+          "name": "ラメフレンチ",
+          "description": "クリアベースのラメフレンチ。",
+          "price": 6050,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000014062487&add=5"
+        },
+        {
+          "id": "nail_handmassage_5",
+          "name": "贅沢ハンドマッサージ（片手5分）",
+          "description": "マッサージオイルを使用したハンドマッサージ。",
+          "price": 550,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000014047388&add=5"
+        },
+        {
+          "id": "nail_handmassage_10",
+          "name": "贅沢ハンドマッサージ（片手10分）",
+          "description": "マッサージオイルを使用したハンドマッサージ。",
+          "price": 1100,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000014047389&add=5"
+        },
+        {
+          "id": "nail_off_only",
+          "name": "ネイルオフのみ",
+          "description": "オフのみ。ハードコートやスカルプオフは＋1,000円。",
+          "price": 2200,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000014052448&add=5"
+        },
+        {
+          "id": "nail_off_care",
+          "name": "ネイルオフのみ（長さカット＋甘皮ケア込み）",
+          "description": "オフ、長さ調整、甘皮ケア込み。",
+          "price": 3300,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000014061679&add=5"
+        },
+        {
+          "id": "nail_repair",
+          "name": "亀裂補強",
+          "description": "亀裂補強一本につき440円。希望本数を備考欄へ入力してください。",
+          "price": 440,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000014062484&add=5",
+          "priceLabel": "¥440〜"
+        },
+        {
+          "id": "nail_extension",
+          "name": "長さ出し",
+          "description": "長さ出し一本につき880円。希望本数を備考欄へ入力してください。",
+          "price": 880,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty（アイラッシュ・ネイル）",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/kr/reserve/?storeId=H000826165&menuId=MN00000014062485&add=5",
+          "priceLabel": "¥880〜"
+        }
+      ]
+    },
+    {
+      "id": "perm",
+      "name": "パーマ",
+      "icon": "🌀",
+      "items": [
+        {
+          "id": "perm_spiral",
+          "name": "スパイラル特殊カール",
+          "description": "ハードスパイラルやツイストパーマなど。デザインにより追加料金。",
+          "price": 15400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000006883542&addMenu=0&rootCd=10",
+          "priceLabel": "¥15,400〜"
+        },
+        {
+          "id": "perm_pin",
+          "name": "ピンカール",
+          "description": "毛先にJカールをふんわり表現。",
+          "price": 15400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000006883541&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "perm_design",
+          "name": "デザインパーマ",
+          "description": "デザインに合わせたパーマ。",
+          "price": 13400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004660&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "perm_digital",
+          "name": "デジタルパーマ",
+          "description": "根元のクセを抑えつつ、毛先にパーマ。",
+          "price": 15600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004677&addMenu=0&rootCd=10",
+          "priceLabel": "¥15,600〜"
+        }
+      ]
+    },
+    {
+      "id": "straight",
+      "name": "縮毛矯正",
+      "icon": "〰️",
+      "items": [
+        {
+          "id": "straight_bang",
+          "name": "前髪縮毛矯正",
+          "description": "前髪のクセを整えます。カット別、ブロー料金込み。",
+          "price": 11000,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000006883545&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "straight_full",
+          "name": "髪質改善縮毛矯正",
+          "description": "全体のクセを整えます。カット別、ブロー料金込み。",
+          "price": 23400,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004644&addMenu=0&rootCd=10"
         }
       ]
     },
@@ -178,20 +1055,71 @@
       "icon": "💆",
       "items": [
         {
-          "id": "spa_carbonic",
-          "name": "高濃度炭酸泉スパ",
-          "description": "炭酸の力で頭皮の汚れをスッキリ落とし、血行を促進します。",
+          "id": "spa_quick",
+          "name": "クイックスパ",
+          "description": "要問い合わせ。ブロー料金別（1,650円）。ネット予約対象外。",
+          "price": 0,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "priceLabel": "要問い合わせ"
+        },
+        {
+          "id": "spa_headbath",
+          "name": "頭身浴",
+          "description": "ブロー料金別（1,650円）。",
           "price": 5500,
-          "duration": 30,
-          "popular": true
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004683&addMenu=0&rootCd=10"
+        },
+        {
+          "id": "spa_head",
+          "name": "頭身スパ",
+          "description": "ブロー料金別（1,650円）。",
+          "price": 6600,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "reservationUrl": "https://beauty.hotpepper.jp/CSP/bt/reserve/?storeId=H000821398&menuId=MN00000007004684&addMenu=0&rootCd=10"
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "name": "その他",
+      "icon": "＋",
+      "items": [
+        {
+          "id": "other_counseling",
+          "name": "カウンセリング",
+          "description": "予約不可。ネット予約対象外。",
+          "price": 0,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "priceLabel": "¥0〜"
+        },
+        {
+          "id": "other_shampoo_blow",
+          "name": "シャンプーブロー",
+          "description": "要問い合わせ。ネット予約対象外。",
+          "price": 0,
+          "duration": "Hot Pepper掲載ページで要確認",
+          "popular": false,
+          "source": "Hot Pepper Beauty",
+          "priceLabel": "要問い合わせ"
         }
       ]
     }
   ],
   "notes": [
-    "表示価格はすべて税込みです。",
-    "ロング料金はございません。",
-    "当日予約も可能です。お気軽にお問い合わせください。",
-    "完全マンツーマン施術のため、予約優先制となっております。"
+    "Hot Pepper Beauty掲載内容を基にした更新です。価格は税込表示です。",
+    "ヘア： https://beauty.hotpepper.jp/slnH000821398/coupon/",
+    "ネイル： https://beauty.hotpepper.jp/kr/slnH000826165/coupon/",
+    "クーポンは予告なく内容を変更・終了する可能性があるため、予約時に各Hot Pepperページの最新内容をご確認ください。",
+    "所要時間は掲載ページに時間表示がないメニューについて「Hot Pepper掲載ページで要確認」としています。",
+    "指定されたネイル・まつげページでは、現在ネイルのクーポン・メニューが掲載されています。アイラッシュ料金は掲載が確認できないため推測していません。"
   ]
 }
